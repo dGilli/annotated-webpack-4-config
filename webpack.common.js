@@ -99,7 +99,9 @@ const baseConfig = {
     entry: configureEntries(),
     output: {
         path: path.resolve(__dirname, settings.paths.dist.base),
-        publicPath: settings.urls.publicPath()
+        publicPath: settings.urls.publicPath(),
+        hotUpdateChunkFilename: 'hot/hot-update.js',
+        hotUpdateMainFilename: 'hot/hot-update.json'
     },
     resolve: {
         alias: {

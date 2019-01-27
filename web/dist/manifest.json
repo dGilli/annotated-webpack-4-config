@@ -1,0 +1,10 @@
+{
+  "vendors~confetti~vue.js": "/dist/js/vendors~confetti~vue.85e656f9f621ba8852bf.js",
+  "vendors~confetti~vue.js.map": "/dist/js/vendors~confetti~vue.85e656f9f621ba8852bf.js.map",
+  "app.js": "/dist/js/app.4b8d92904e23b029d921.js",
+  "app.js.map": "/dist/js/app.4b8d92904e23b029d921.js.map",
+  "confetti.js": "/dist/js/confetti.0657e936efd18107baf1.js",
+  "confetti.js.map": "/dist/js/confetti.0657e936efd18107baf1.js.map",
+  "../sw.js": "/dist/../sw.js",
+  "js/precache-manifest.js": "/dist/js/precache-manifest.4e1b3afdb7367dba54ffaf1ef4fb805d.js"
+}

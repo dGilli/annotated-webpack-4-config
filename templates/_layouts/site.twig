@@ -1,0 +1,31 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+
+{% extends "_layouts/base.twig" %}
+
+{% set show_ads = (show_ads is not defined and entry.showAds is defined and entry.showAds) or (show_ads is defined and show_ads) %}
+{% set show_logos =  (show_logos is not defined and entry.showLogos is defined and entry.showLogos) or (show_logos is defined and show_logos) %}
+
+{# Set the `bodyClass` variable to the entry's section handle if there is one,
+   or the first URI segment (this is used by the parent template) #}
+{% if bodyClass is not defined %}
+    {% set bodyClass = entry is defined ? entry.section.handle : craft.app.request.segments|first %}
+{% endif %}
+
+{# Set the `title` variable to the nav item that matches the first segment #}
+{#{% if nav[bodyClass] is defined %}#}
+    {#{% set title %}{% if title is defined and title %}{{ title }} - {% endif %}{{ nav[bodyClass].title }}{% endset %}#}
+{#{% endif %}#}
+
+{% block body %}
+    <header id="header" role="banner">
+        {% block header %}{% include '_includes/header.twig' ignore missing %}{% endblock %}
+    </header>
+
+    <main role="main">
+        {% block main %}{% endblock %}
+    </main>
+
+    <footer id="footer">
+        {% block footer %}{% include '_includes/footer.twig' ignore missing %}{% endblock %}
+    </footer>
+{% endblock %}

@@ -6,9 +6,15 @@
     {% block head %}
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta charset="utf-8">
-        <title>{% if title is defined %}{{ title }} - {% endif %}{{ craft.app.sites.currentSite.name }}</title>
+        <title>{% if title is defined %}{{ title }} - {% endif %}{{ currentSite.group.name }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
         <meta name="referrer" content="origin-when-cross-origin" />
+
+        {% if entry.seoMetaDescription|length %}
+            <meta name="description" content="{{ entry.seoMetaDescription }}">
+        {% endif %}
+
+        <link rel="home" href="{{ siteUrl }}" />
 
         <!--# if expr="$HTTP_COOKIE=/critical\-css\=1/" -->
         {{ craft.twigpack.includeCssModule("styles.css", false) }}

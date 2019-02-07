@@ -2,13 +2,14 @@
 
 {% extends "_layouts/base.twig" %}
 
-{% set show_ads = (show_ads is not defined and entry.showAds is defined and entry.showAds) or (show_ads is defined and show_ads) %}
-{% set show_logos =  (show_logos is not defined and entry.showLogos is defined and entry.showLogos) or (show_logos is defined and show_logos) %}
-
 {# Set the `bodyClass` variable to the entry's section handle if there is one,
    or the first URI segment (this is used by the parent template) #}
 {% if bodyClass is not defined %}
     {% set bodyClass = entry is defined ? entry.section.handle : craft.app.request.segments|first %}
+{% endif %}
+
+{% if title is not defined %}
+    {% set title = (entry.seoTitle ?? entry.title)|title %}
 {% endif %}
 
 {# Set the `title` variable to the nav item that matches the first segment #}
@@ -18,7 +19,64 @@
 
 {% block body %}
     <header id="header" role="banner">
-        {% block header %}{% include '_includes/header.twig' ignore missing %}{% endblock %}
+        {% block header %}
+            <nav class="navbar global-navbar" id="globalNavbar">
+                <div class="gn-container">
+                    <div class="navbar-header gn-header" id="gnHeader">
+                        <button id="gnToggle" type="button" class="navbar-toggle gn-toggle collapsed" data-toggle="collapse" data-target="#gnCollapse" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle Navigation</span>
+                            <span class="icon-bar ib-custom top-bar"></span>
+                            <span class="icon-bar ib-custom middle-bar"></span>
+                            <span class="icon-bar ib-custom bottom-bar"></span>
+                        </button>
+
+                        <div class="navbar-brand" id="gnBrand">
+                            {#{% if craft.config.domain == 'ch' %}#}
+                                {#{% set brandPath = '/assets/ch/brand/christundheiri_logo_' ~ locale.id ~ '.png' %}#}
+                            {#{% elseif craft.config.domain == 'gh' %}#}
+                                {#{% set brandPath = '/assets/gh/brand/grieshaber_logo_' ~ locale.id ~ '.png' %}#}
+                            {#{% endif %}#}
+
+                            {#<a href="{{ siteUrl }}"><img src="{{ brandPath }}" alt=""></a>#}
+                        </div>
+                    </div>
+
+                    <div class="navbar-collapse gn-collapse collapse" id="gnCollapse">
+                        <div class="content">
+                            <ul class="nav navbar-nav gn-navbar" id="gnNavbar">
+
+                                {% set nav = craft.entries()
+                                    .section('sitestructure')
+                                    .level(1)
+                                    .all() %}
+
+                                {% for item in nav if item.showInNav.contains('primary') %}
+                                    {% if item.type.handle == 'jobs' and craft.entries().section('jobs').count() %}
+                                        <li {{ (entry is defined and item.id == entry.id) or (entryOf is defined and entryOf == item.slug) ? 'class="active"' }}>
+                                            <a href="{{ item.getUrl }}" title="{{ naviitemitemem.title|lower }}">{{ item.title|upper }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li {{ (entry is defined and item.id == entry.id) or (entryOf is defined and entryOf == item.slug) ? 'class="active"' }}>
+                                            <a href="{{ item.getUrl }}" title="{{ item.title|lower }}">{{ item.title|upper }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+
+                            </ul>
+
+                            <ul class="nav navbar-nav gn-langbar" id="gnLangbar">
+                                {#{% set locales = craft.LocaleHelper.siteLocales() %}#}
+                                {#{% for locale in locales %}#}
+                                    {#<li {{ locale.active ? 'class="active"' }}>#}
+                                        {#<a href="{{ locale.url }}"  title="{{ locale.nativeName|lower }}">{{ locale.nativeName|upper }}</a>#}
+                                    {#</li>#}
+                                {#{% endfor %}#}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        {% endblock %}
     </header>
 
     <main role="main">

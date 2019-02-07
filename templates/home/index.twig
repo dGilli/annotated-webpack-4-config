@@ -1,0 +1,14 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+ # The homepage template
+ # ------------------------
+ #}
+
+{% extends "_layouts/site.twig" %}
+
+{% import '_macros/laysizes.twig' as lazysizes %}
+
+
+{% block main %}
+    {{ currentSite.handle }}
+{% endblock %}

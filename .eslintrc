@@ -1,0 +1,18 @@
+{
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true,
+        "jquery": true
+    },
+    "extends": "airbnb-base",
+    "rules": {
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+        "indent": ["error", 4],
+        "no-return-assign": ["error", "except-parens"],
+        "object-curly-newline": ["error", {
+          "multiline": true,
+          "consistent": true
+        }]
+    }
+}

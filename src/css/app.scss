@@ -1,0 +1,9 @@
+@import '~tailwindcss/preflight';
+@import '~tailwindcss/components';
+
+@import './variables.scss';
+@import './components/global.scss';
+@import './components/typography.scss';
+@import './components/webfonts.scss';
+
+@import '~tailwindcss/utilities';

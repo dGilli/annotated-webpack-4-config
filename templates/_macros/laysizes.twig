@@ -1,0 +1,19 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+
+{%- macro src(asset, widths) -%}
+    {# src #}         {{ asset.getUrl({ mode: 'fit', width: widths[0] }) }}"
+    {# data-sizes #}  data-sizes="auto"
+    {# data-srcset #} data-srcset="{%- for width in widths -%}{{ asset.getUrl({ mode: 'fit', width: width }) }} {{ width }}w{{ not loop.last ? ', ' }}{%- endfor -%}"
+{%- endmacro -%}
+
+{%- macro bgset(asset, widths) -%}
+    {# style #}      background-image:url({{ asset.url }});"
+    {# data-sizes #} data-sizes="auto"
+    {# data-bgset #} data-bgset="{%- for width in widths -%}{{ asset.getUrl({ mode: 'fit', width: width }) }} {{ width }}w{{ not loop.last ? ', ' }}{%- endfor -%}"
+{%- endmacro -%}
+
+{%- macro parentFit(asset, widths) -%}
+    {# src #}         {{ asset.getUrl({ mode: 'fit', width: widths[0] }) }}"
+    {# data-sizes #}  data-sizes="auto"
+    {# data-srcset #} data-srcset="{%- for width in widths -%}{{ asset.getUrl({ mode: 'fit', width: width }) }} {{ width }}w{{ loop.first ? ' ' ~ asset.getHeight({ mode: 'fit', width: width }) ~ 'h' }}{{ not loop.last ? ', ' }}{%- endfor -%}"
+{%- endmacro -%}

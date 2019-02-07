@@ -28,14 +28,14 @@ module.exports = {
     urls: {
         live: "https://example.com/",
         local: "http://example.test/",
-        critical: "http://example.test/",
+        critical: "https://example.com/",
         publicPath: () => process.env.PUBLIC_PATH || "/dist/",
     },
     vars: {
         cssName: "styles"
     },
     entries: {
-        "app": "app.js"
+        "app": ["bootstrap-loader", "app.js"],
     },
     copyWebpackConfig: [
         {

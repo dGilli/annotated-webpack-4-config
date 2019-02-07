@@ -2,9 +2,12 @@
 const LEGACY_CONFIG = 'legacy';
 const MODERN_CONFIG = 'modern';
 
+// require('bootstrap-loader');
+
 // node modules
 const path = require('path');
 const merge = require('webpack-merge');
+const webpack = require('webpack');
 
 // webpack plugins
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -52,7 +55,9 @@ const configureBabelLoader = (browserList) => {
 const configureEntries = () => {
     let entries = {};
     for (const [key, value] of Object.entries(settings.entries)) {
-        entries[key] = path.resolve(__dirname, settings.paths.src.js + value);
+        entries[key] = value.map((value) => (value.match('.js$')
+            ? path.resolve(__dirname, settings.paths.src.js + value)
+            : value));
     }
 
     return entries;
@@ -96,6 +101,7 @@ const configureVueLoader = () => {
 // The base webpack config
 const baseConfig = {
     name: pkg.name,
+    // entry: [ 'bootstrap-loader', './src/js/app.js' ],
     entry: configureEntries(),
     output: {
         path: path.resolve(__dirname, settings.paths.dist.base),
@@ -117,6 +123,25 @@ const baseConfig = {
     plugins: [
         new WebpackNotifierPlugin({title: 'Webpack', excludeWarnings: true, alwaysNotify: true}),
         new VueLoaderPlugin(),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery",
+            Tether: "tether",
+            "window.Tether": "tether",
+            Popper: ['popper.js', 'default'],
+            Alert: "exports-loader?Alert!bootstrap/js/dist/alert",
+            Button: "exports-loader?Button!bootstrap/js/dist/button",
+            Carousel: "exports-loader?Carousel!bootstrap/js/dist/carousel",
+            Collapse: "exports-loader?Collapse!bootstrap/js/dist/collapse",
+            Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
+            Modal: "exports-loader?Modal!bootstrap/js/dist/modal",
+            Popover: "exports-loader?Popover!bootstrap/js/dist/popover",
+            Scrollspy: "exports-loader?Scrollspy!bootstrap/js/dist/scrollspy",
+            Tab: "exports-loader?Tab!bootstrap/js/dist/tab",
+            Tooltip: "exports-loader?Tooltip!bootstrap/js/dist/tooltip",
+            Util: "exports-loader?Util!bootstrap/js/dist/util",
+        })
     ]
 };
 

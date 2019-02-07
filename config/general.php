@@ -47,6 +47,7 @@ return [
         'custom' => [
             'craftEnv' => CRAFT_ENVIRONMENT,
             'staticAssetsVersion' => 1,
+            'defaultLocale' => 'de', // Locale needs to be present for every site
         ]
     ],
 

@@ -41,6 +41,8 @@ extractStyles: false
 #
 # bootstrapCustomizations: ./path/to/bootstrap/customizations.scss
 
+bootstrapCustomizations: ./src/css/variables.scss
+
 
 # Import your custom styles here
 # Usually this endpoint-file contains list of @imports of your application styles
@@ -60,10 +62,10 @@ styles:
   glyphicons: false
 
   # Core CSS
-  scaffolding: false
+  scaffolding: true
   type: true
   code: false
-  grid: false
+  grid: true
   tables: false
   forms: true
   buttons: false

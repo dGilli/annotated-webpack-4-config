@@ -6,128 +6,133 @@ require('dotenv').config();
 // Webpack settings exports
 // noinspection WebpackConfigHighlighting
 module.exports = {
-    name: "Example Project",
-    copyright: "Example Company, Inc.",
+    name: 'Example Project',
+    copyright: 'Example Company, Inc.',
     paths: {
         src: {
-            base: "./src/",
-            css: "./src/css/",
-            js: "./src/js/"
+            base: './src/',
+            css: './src/css/',
+            js: './src/js/',
         },
         dist: {
-            base: "./web/dist/",
+            base: './web/dist/',
             clean: [
-                "./img",
-                "./criticalcss",
-                "./css",
-                "./js"
-            ]
+                './img',
+                './criticalcss',
+                './css',
+                './js',
+            ],
         },
-        templates: "./templates/"
+        templates: './templates/',
     },
     urls: {
-        live: "https://example.com/",
-        local: "http://example.test/",
-        critical: "https://example.com/",
-        publicPath: () => process.env.PUBLIC_PATH || "/dist/",
+        live: 'https://example.com/',
+        local: 'http://example.test/',
+        critical: 'https://example.com/',
+        publicPath: () => process.env.PUBLIC_PATH || '/dist/',
     },
     vars: {
-        cssName: "styles"
+        cssName: 'styles',
     },
     entries: {
-        "app": ["bootstrap-loader", "app.js"],
+        app: ['bootstrap-loader', 'app.js'],
     },
     copyWebpackConfig: [
+        // {
+        //     from: './src/img/*_logo_*.png',
+        //     to: 'img/brand/[2]/[1]_logo.[ext]',
+        //     test: /^.+\/(\w*)_logo_(.{2})\..+$/,
+        // },
         {
-            from: "./src/js/workbox-catch-handler.js",
-            to: "js/[name].[ext]"
-        }
+            from: './src/js/workbox-catch-handler.js',
+            to: 'js/[name].[ext]',
+        },
     ],
     criticalCssConfig: {
-        base: "./web/dist/criticalcss/",
-        suffix: "_critical.min.css",
+        base: './web/dist/criticalcss/',
+        suffix: '_critical.min.css',
         criticalHeight: 1200,
         criticalWidth: 1200,
-        ampPrefix: "amp_",
+        ampPrefix: 'amp_',
         ampCriticalHeight: 19200,
         ampCriticalWidth: 600,
         pages: [
             {
-                url: "",
-                template: "index"
-            }
-        ]
+                url: '',
+                template: 'index',
+            },
+        ],
     },
     devServerConfig: {
-        public: () => process.env.DEVSERVER_PUBLIC || "http://localhost:8080",
-        host: () => process.env.DEVSERVER_HOST || "localhost",
+        public: () => process.env.DEVSERVER_PUBLIC || 'http://localhost:8080',
+        host: () => process.env.DEVSERVER_HOST || 'localhost',
         poll: () => process.env.DEVSERVER_POLL || false,
         port: () => process.env.DEVSERVER_PORT || 8080,
         https: () => process.env.DEVSERVER_HTTPS || false,
     },
     manifestConfig: {
-        basePath: ""
+        basePath: '',
     },
     purgeCssConfig: {
         paths: [
-            "./templates/**/*.{twig,html}",
-            "./src/vue/**/*.{vue,html}"
+            './templates/**/*.{twig,html}',
+            './src/vue/**/*.{vue,html}',
         ],
         whitelist: [
-            "./src/css/components/**/*.{css,pcss}"
+            './src/css/components/**/*.{css,pcss}',
         ],
         whitelistPatterns: [],
         extensions: [
-            "html",
-            "js",
-            "twig",
-            "vue"
-        ]
+            'html',
+            'js',
+            'twig',
+            'vue',
+        ],
     },
     saveRemoteFileConfig: [
         {
-            url: "https://www.google-analytics.com/analytics.js",
-            filepath: "js/analytics.js"
-        }
+            url: 'https://www.google-analytics.com/analytics.js',
+            filepath: 'js/analytics.js',
+        },
     ],
     createSymlinkConfig: [
         {
-            origin: "img/favicons/favicon.ico",
-            symlink: "../favicon.ico"
-        }
+            origin: 'img/favicons/favicon.ico',
+            symlink: '../favicon.ico',
+        },
     ],
     webappConfig: {
-        logo: "./src/img/favicon-src.png",
-        prefix: "img/favicons/"
+        logo: './src/img/favicon-src.png',
+        prefix: 'img/favicons/',
     },
     workboxConfig: {
-        swDest: "../sw.js",
-        precacheManifestFilename: "js/precache-manifest.[manifestHash].js",
+        swDest: '../sw.js',
+        precacheManifestFilename: 'js/precache-manifest.[manifestHash].js',
         importScripts: [
-            "/dist/workbox-catch-handler.js"
+            '/dist/workbox-catch-handler.js',
         ],
         exclude: [
             /\.(png|jpe?g|gif|svg|webp)$/i,
             /\.map$/,
             /^manifest.*\\.js(?:on)?$/,
         ],
-        globDirectory: "./web/",
+        globDirectory: './web/',
         globPatterns: [
-            "offline.html",
-            "offline.svg"
+            'offline.html',
+            'offline.svg',
         ],
         offlineGoogleAnalytics: true,
         runtimeCaching: [
             {
                 urlPattern: /\.(?:png|jpg|jpeg|svg|webp)$/,
-                handler: "cacheFirst",
+                handler: 'cacheFirst',
                 options: {
-                    cacheName: "images",
+                    cacheName: 'images',
                     expiration: {
-                        maxEntries: 20
-                    }
-                }
-            }
-        ]
-    }
+                        maxEntries: 20,
+                    },
+                },
+            },
+        ],
+    },
 };

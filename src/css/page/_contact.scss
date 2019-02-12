@@ -1,0 +1,26 @@
+//
+// Page Contact
+// --------------------------------------------------
+
+
+body.contact {
+    section.contact-form {
+        margin-bottom: 100px;
+    }
+    .maps {
+        @media (max-width: $screen-xs-max) {
+            margin-top: 30px;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+        iframe {
+            pointer-events: none;
+        }
+    }
+}
+
+#contactForm .button-group {
+    @media (max-width: $screen-xs-max) {
+        margin-top: 30px;
+    }
+}

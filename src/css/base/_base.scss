@@ -1,0 +1,117 @@
+//
+// Base styles
+// --------------------------------------------------
+
+@if $footer-sticky {
+    body {
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+    }
+
+    main {
+        flex-grow: 1;
+    }
+}
+
+a:hover {
+    color: $text-color
+}
+
+p a,
+.web-link {
+    font-weight: 500;
+    &::before {
+        display: inline-block;
+        position: relative;
+        top: 1px;
+        margin-right: 3px;
+        transition: margin .1s ease-out;
+        color: $color-portica;
+        font-family: 'Glyphicons Halflings';
+        font-size: 12px;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        content: '\e072';
+    }
+    &:hover {
+        text-decoration: none;
+        &::before {
+            margin-right: 1px;
+            margin-left: 2px;
+            transition: margin .1s ease-out;
+        }
+    }
+}
+
+img,
+figure {
+    @include img-responsive;
+    width: 100%;
+}
+
+video {
+    width: 100%;
+}
+
+ins {
+    text-decoration: none;
+}
+
+a {
+    color: $text-color;
+    &[href^='mailto'],
+    &[href^='tel'] {
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    &[href$='.pdf'],
+    &[href$='.PDF'] {
+        font-weight: 300;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+        &::before {
+            display: inline-block;
+            position: relative;
+            top: 1px;
+            margin-right: 5px;
+            color: $text-color;
+            font-family: 'Glyphicons Halflings';
+            font-style: normal;
+            font-weight: normal;
+            line-height: 1;
+            content: '\e022';
+        }
+    }
+}
+
+img + p,
+video + p {
+    margin-top: 8px;
+    font-size: 14px;
+    @media (min-width: $screen-sm-min) {
+        font-size: 12px;
+    }
+}
+
+ul,
+ol {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    list-style: inside;
+}
+
+address {
+    line-height: 1.28;
+    > a {
+        display: inline-block;
+        &:first-of-type {
+            margin-top: 5px;
+        }
+    }
+}

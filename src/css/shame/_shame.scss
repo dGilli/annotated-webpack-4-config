@@ -1,0 +1,61 @@
+//
+// Shame
+// --------------------------------------------------
+
+
+.block {
+    > .col-4,
+    > .col-6,
+    > .col-8,
+    > .col-12 {
+        margin-bottom: 35px;
+    }
+}
+
+.flowtext-asset {
+    &.left {
+        margin-top: 8px;
+        padding: 0 0 15px;
+        @media (min-width: $screen-sm-min) {
+            margin-right: 15px;
+            padding-right: 15px;
+            padding-left: 0;
+            float: left;
+            + p {
+                margin-top: 8px;
+            }
+        }
+    }
+    &.right {
+        margin-top: 8px;
+        padding: 0 0 15px;
+        @media (min-width: $screen-sm-min) {
+            margin-top: 0;
+            margin-left: 15px;
+            padding-right: 0;
+            padding-left: 15px;
+            float: right;
+        }
+    }
+}
+
+.flowtext {
+    ul {
+        display: inline-block;
+    }
+}
+
+.back-link {
+    display: block;
+    margin-top: -38px;
+}
+
+.terms {
+    address {
+        display: inline-block;
+        margin-bottom: 35px;
+        & + .block {
+            margin-top: -15px;
+        }
+    }
+}

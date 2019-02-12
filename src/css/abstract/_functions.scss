@@ -1,0 +1,45 @@
+//
+// Functions
+// --------------------------------------------------
+
+
+// Calculate Percentage
+// --------------------------------------------------
+
+@function calc-percent($target, $container) {
+    @return ($target / $container) * 100%;
+}
+
+// 'calc-percent' short-name
+@function cp($target, $container) {
+    @return calc-percent($target, $container);
+}
+
+
+// Strip unit function
+// --------------------------------------------------
+
+@function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+}
+
+
+// Clamp a number
+// --------------------------------------------------
+
+@function clamp($value, $min, $max) {
+    @return if($value > $max, $max, if($value < $min, $min, $value));
+}
+
+
+// Get map key map
+// --------------------------------------------------
+
+@function get-key-map($map, $key, $value) {
+    @each $keys, $values in $map {
+        @if $keys == $key {
+            $value: #{nth($values, $value)};
+        }
+    }
+    @return $value
+}

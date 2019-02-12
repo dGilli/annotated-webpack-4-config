@@ -1,0 +1,78 @@
+//
+// Navigation
+// --------------------------------------------------
+
+
+.gn-navbar,
+.gf-navbar > ul,
+.gn-langbar {
+    font-family: $nav-font-family;
+
+    li > a {
+        color: $nav-link-color;
+        @if $nav-hover-transitions {
+            @media (min-width: $screen-sm-min) {
+                @include transition(color .3s);
+            }
+        }
+
+        &:hover {
+            background-color: $nav-link-hover-bg;
+            color: $nav-link-hover-color;
+            @if $nav-hover-transitions {
+                @media (min-width: $screen-sm-min) {
+                    @include transition(color .3s);
+                }
+            }
+        }
+
+        &:active,
+        &:focus {
+            background-color: $nav-link-active-bg;
+            color: $nav-link-active-color;
+            font-weight: 600;
+        }
+    }
+
+    .active > a {
+        background-color: $nav-link-active-bg;
+        color: $nav-link-active-color;
+        font-weight: bold;
+
+        &,
+        &:hover {
+            background-color: $nav-link-active-bg;
+            color: $nav-link-active-color;
+        }
+    }
+
+    .disabled > a {
+        &,
+        &:hover {
+            background-color: $nav-link-disabled-bg;
+            color: $nav-link-disabled-color;
+        }
+    }
+}
+
+.gn-navbar,
+.gn-langbar {
+    li,
+    li > a {
+        text-align: center;
+        text-transform: uppercase;
+
+        @media (min-width: $screen-md) {
+            display: inline-block;
+        }
+    }
+
+    li > a::before {
+        display: block;
+        content: attr(title);
+        font-weight: bold;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+    }
+}

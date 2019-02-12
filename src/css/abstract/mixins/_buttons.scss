@@ -1,0 +1,18 @@
+//
+// Buttons
+// --------------------------------------------------
+
+// Margin longhand
+@mixin btn {
+    @include user-select(none);
+    display: inline-block;
+    margin-bottom: 0; // For input.btn
+    border: 1px solid transparent;
+    background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+    font-weight: $btn-font-weight;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    vertical-align: middle;
+    touch-action: manipulation;
+}

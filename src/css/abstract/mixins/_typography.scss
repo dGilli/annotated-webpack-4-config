@@ -1,0 +1,23 @@
+//
+// Typography Mixins
+// --------------------------------------------------
+
+@mixin get-heading-font-size($map, $key, $value) {
+    @each $array, $size in $map {
+        @if $array == $key {
+            font-size: #{nth($size, $value)};
+        }
+    }
+}
+
+@mixin make-heading-font-size {
+    @for $i from 1 through 6 {
+        h#{$i},
+        .h#{$i} {
+            @include get-heading-font-size($headings-font-size, h#{$i}, 2);
+            @media (min-width: $grid-float-breakpoint) {
+                @include get-heading-font-size($headings-font-size, h#{$i}, 1);
+            }
+        }
+    }
+}

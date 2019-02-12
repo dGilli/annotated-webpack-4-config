@@ -1,0 +1,69 @@
+//
+// Alignment Mixins
+// --------------------------------------------------
+
+
+// Align child within element
+@mixin valign-child($child-class, $alignment) {
+    &::before {
+        display: inline-block;
+        height: 100%;
+        margin-right: -.25em;
+        content: '';
+        vertical-align: middle;
+    }
+    > .#{$child-class} {
+        display: inline-block;
+        vertical-align: $alignment;
+    }
+}
+
+// 'responsive-vertical-align-child' short-name
+@mixin vac($alignment) {
+    @include responsive-vertical-align-child($alignment);
+}
+
+@mixin static-vertical-align($parent-height, $element-height) {
+    margin-top: (($parent-height - $element-height) / 2);
+    margin-bottom: (($parent-height - $element-height) / 2);
+}
+
+@mixin sva($parent-height, $element-height) {
+    margin-top: (($parent-height - $element-height) / 2);
+    margin-bottom: (($parent-height - $element-height) / 2);
+}
+
+@mixin resp-align-columns($row-el, $column-el, $collumn-count) {
+    @for $i from 1 through $grid-columns {
+        .#{$row-el}[data-columns='#{$i}'] {
+            $collumn-width: $grid-columns / $collumn-count;
+            $collumns-offset: ($grid-columns - ($collumn-width * $i)) / 2;
+            .#{$column-el} {
+                @include make-sm-column($collumn-width);
+                &:first-of-type {
+                    @include make-sm-column-offset($collumns-offset);
+                }
+            }
+        }
+    }
+}
+
+@mixin claim-align {
+    @include make-sm-column(11);
+    @include make-sm-column-push(1);
+    padding-right: (nth($header-brand-claim-offset, 1)); // Add same padding right to center contents again
+    padding-left: (nth($header-brand-claim-offset, 1)); // Add extra padding taking the logo claim offset into account
+    @media (min-width: $grid-float-breakpoint) {
+        padding-right: (nth($header-brand-claim-offset, 1)); // Add same padding right to center contents again
+        padding-left: (nth($header-brand-claim-offset, 1)); // Add extra padding taking the logo claim offset into account
+    }
+}
+
+@mixin claim-align-padding {
+    padding-right: ((nth($header-brand-claim-offset, 2)) + ($grid-gutter-width / 2)); // Add same padding right to center contents again
+    padding-left: ((nth($header-brand-claim-offset, 2)) + ($grid-gutter-width / 2)); // Add extra padding taking the logo claim offset and column padding into account
+    @media (min-width: $grid-float-breakpoint) {
+        padding-right: ((nth($header-brand-claim-offset, 1)) + ($grid-gutter-width / 2)); // Add same padding right to center contents again
+        padding-left: ((nth($header-brand-claim-offset, 1)) + ($grid-gutter-width / 2)); // Add extra padding taking the logo claim offset and column padding into account
+    }
+}

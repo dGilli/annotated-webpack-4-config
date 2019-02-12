@@ -1,0 +1,13 @@
+//
+// SASS Propery Mixins
+// --------------------------------------------------
+
+
+// Margin longhand
+@mixin margin($top, $right, $bottom, $left) {
+    margin: $top $right $bottom $left;
+}
+// Padding longhand
+@mixin padding($top, $right, $bottom, $left) {
+    padding: $top $right $bottom $left;
+}

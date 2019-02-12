@@ -1,0 +1,303 @@
+//
+// Header
+// --------------------------------------------------
+
+.header {
+    margin-top: (nth($header-margin-top, 1));
+    margin-bottom: (nth($header-margin-bottom, 1));
+    @media (min-width: $grid-float-breakpoint) {
+        margin-top: (nth($header-margin-top, 2));
+        margin-bottom: (nth($header-margin-bottom, 2));
+    }
+}
+
+.gn-header {
+    position: relative;
+    @media (max-width: $grid-float-breakpoint-max) {
+        border-bottom: 12px solid $header-border-color;
+    }
+}
+
+
+//== Header Brand
+//
+//##
+
+.navbar-brand {
+    margin-top: -1px;
+    padding: (nth($brand-padding, 1));
+    @media (min-width: $screen-sm-min) {
+        padding-left: 0;
+    }
+    @media (min-width: $grid-float-breakpoint) {
+        padding: (nth($brand-padding, 2));
+    }
+    img {
+        width: (nth($brand-width, 1));
+        height: (nth($brand-height, 1));
+        @media (min-width: $screen-sm-min) {
+            width: (nth($brand-width, 2));
+            height: (nth($brand-height, 2));
+        }
+    }
+}
+
+
+//== Toggle Button
+//
+//##
+
+.gn-toggle {
+    margin: $navbar-toggle-margin;
+    padding: $navbar-toggle-padding-vertical $navbar-toggle-padding-horizontal;
+    border: 1px solid $navbar-toggle-border-color;
+    background-color: $navbar-toggle-bg;
+    @if $navbar-toggle-vertical-align == middle {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        margin-top: -($navbar-toggle-height-computed / 2);
+    }
+    &:hover {
+        background-color: $navbar-toggle-hover-bg;
+    }
+    > .ib-custom {
+        width: $navbar-toggle-icon-bar-width;
+        height: $navbar-toggle-icon-bar-height;
+        border-radius: $navbar-toggle-icon-bar-border-radius;
+        background-color: $navbar-toggle-icon-bar-bg;
+    }
+    .ib-custom + .ib-custom {
+        margin-top: $navbar-toggle-icon-bar-spacing;
+    }
+
+    // Toggle button animation
+
+    .icon-bar {
+        transition: transform .2s, opacity .2s;
+    }
+    .top-bar {
+        transform: rotate(45deg);
+        transform-origin: 16% 25%;
+    }
+    .middle-bar {
+        opacity: 0;
+    }
+    .bottom-bar {
+        transform: rotate(-45deg);
+        transform-origin: 16% 75%;
+    }
+    &.collapsed {
+        .top-bar {
+            transform: rotate(0);
+        }
+        .middle-bar {
+            opacity: 1;
+        }
+        .bottom-bar {
+            transform: rotate(0);
+        }
+    }
+}
+
+
+//== Global Navbar
+//
+//##
+
+.gn-collapse {
+    margin-top: -12px;
+    background-color: $color-portica;
+    @media (max-width: $screen-sm-max) {
+        position: absolute;
+        width: 750px;
+        z-index: 9999;
+    }
+    @media (max-width: $screen-xs-max) {
+        position: absolute;
+        width: 100%;
+        z-index: 9999;
+    }
+    @media (min-width: $grid-float-breakpoint) {
+        margin-top: 0;
+        padding-right: 0;
+        padding-left: 0;
+        border-bottom: 12px solid $header-border-color;
+        background-color: transparent;
+    }
+    > .content {
+        position: relative;
+        text-align: center;
+        @media (min-width: $grid-float-breakpoint) {
+            float: right;
+        }
+    }
+}
+
+.gn-navbar {
+    margin: (nth($navbar-margin, 1));
+    font-size: (nth($navbar-font-size, 1));
+    @media (min-width: $grid-float-breakpoint) {
+        margin: (nth($navbar-margin, 2));
+        font-size: (nth($navbar-font-size, 2));
+    }
+    li > a {
+        padding: (nth($navbar-link-padding-vertical, 1)) (nth($navbar-link-padding-horizontal, 1));
+        text-align: center;
+        @media (min-width: $grid-float-breakpoint) {
+            padding: (nth($navbar-link-padding-vertical, 2)) (nth($navbar-link-padding-horizontal, 2));
+            &:hover::after {
+                position: absolute;
+                right: (nth($navbar-link-padding-horizontal, 2));
+                bottom: 0;
+                left: (nth($navbar-link-padding-horizontal, 2));
+                border-bottom: 5px solid $color-portica;
+                content: '';
+            }
+        }
+    }
+    .active > a {
+        &::after {
+            position: absolute;
+            right: (nth($navbar-link-padding-horizontal, 1));
+            bottom: 0;
+            left: (nth($navbar-link-padding-horizontal, 1));
+            border-bottom: 5px solid $color-portica;
+            content: '';
+            @media (min-width: $grid-float-breakpoint) {
+                right: (nth($navbar-link-padding-horizontal, 2));
+                left: (nth($navbar-link-padding-horizontal, 2));
+            }
+        }
+    }
+}
+
+
+//== Global Langbar
+//
+//##
+
+.gn-langbar {
+    display: inline-block;
+    margin: (nth($langbar-margin, 1));
+    font-size: (nth($langbar-font-size, 1));
+    @media (min-width: $grid-float-breakpoint) {
+        position: absolute;
+        right: 0;
+        margin: (nth($langbar-margin, 2));
+        float: right;
+        font-size: (nth($langbar-font-size, 2));
+    }
+    li {
+        float: left;
+        &:last-child > a {
+            &::after {
+                display: none;
+            }
+        }
+    }
+    li > a {
+        padding: (nth($langbar-link-padding-vertical, 1)) (nth($langbar-link-padding-horizontal, 1));
+        @media (min-width: $grid-float-breakpoint) {
+            padding: (nth($langbar-link-padding-vertical, 2)) (nth($langbar-link-padding-horizontal, 2));
+        }
+        &::after {
+            position: absolute;
+            top: 14px;
+            right: -1px;
+            height: 11px;
+            border-right: 1px solid $color-black;
+            content: '';
+            @media (min-width: $grid-float-breakpoint) {
+                top: 10px;
+                height: 9px;
+            }
+        }
+    }
+}
+
+// #gnNavbar {
+//     font-size: (nth($navbar-font-size, 1));
+//     @include resp-property(margin, $navbar-margin);
+//     @media (max-width: $grid-float-breakpoint-max) {
+//         text-align: center;
+//     }
+//     @media (min-width: $grid-float-breakpoint) {
+//         font-size: (nth($navbar-font-size, 2));
+//     }
+//     li {
+//         @media (max-width: $grid-float-breakpoint-max) {
+//             display: block !important;
+//         }
+//     }
+//     li > a {
+//         padding: (nth($navbar-link-padding-vertical, 1)) (nth($navbar-link-padding-horizontal, 1));
+//         @media (min-width: $grid-float-breakpoint) {
+//             padding: (nth($navbar-link-padding-vertical, 2)) (nth($navbar-link-padding-horizontal, 2));
+//         }
+//         &:hover:after {
+//             content: " ";
+//             position: absolute;
+//             bottom: 0;
+//             left: (nth($navbar-link-padding-horizontal, 1));
+//             right: (nth($navbar-link-padding-horizontal, 1));
+//             border-bottom: 5px solid $color-portica;
+//             @media (min-width: $grid-float-breakpoint) {
+//                 left: (nth($navbar-link-padding-horizontal, 2));
+//                 right: (nth($navbar-link-padding-horizontal, 2));
+//             }
+//         }
+//     }
+//     .active > a:after {
+//         content: " ";
+//         position: absolute;
+//         bottom: 0;
+//         left: (nth($navbar-link-padding-horizontal, 1));
+//         right: (nth($navbar-link-padding-horizontal, 1));
+//         border-bottom: 5px solid $color-portica;
+//         @media (min-width: $grid-float-breakpoint) {
+//             left: (nth($navbar-link-padding-horizontal, 2));
+//             right: (nth($navbar-link-padding-horizontal, 2));
+//         }
+//     }
+// }
+
+
+//== Global Langbar
+//
+//##
+
+// #gnLangbar {
+//     position: absolute;
+//     bottom: 0;
+//     left: 0;
+//     right: 0;
+//     margin: (nth($langbar-margin, 1));
+//     text-align: center;
+//     font-size: (nth($langbar-font-size, 1));
+//     @media (min-width: $grid-float-breakpoint) {
+//         position: relative;
+//         margin: (nth($langbar-margin, 2));
+//         font-size: (nth($langbar-font-size, 2));
+//     }
+//     ul {
+//         display: inline-block;
+//     }
+//     li > a {
+//         padding: (nth($langbar-link-padding-vertical, 1)) (nth($langbar-link-padding-horizontal, 1));
+//         @media (min-width: $grid-float-breakpoint) {
+//             padding: (nth($langbar-link-padding-vertical, 2)) (nth($langbar-link-padding-horizontal, 2));
+//         }
+//         &:after {
+//             content: " ";
+//             position: absolute;
+//             top: 10px;
+//             right: -1px;
+//             height: 9px;
+//             border-right: 1px solid black;
+//         }
+//     }
+//     li:last-child > a:after {
+//         display: none;
+//     }
+// }

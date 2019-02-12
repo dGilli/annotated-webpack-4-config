@@ -1,0 +1,36 @@
+//
+// Buttons
+// --------------------------------------------------
+
+
+.button {
+    @include btn;
+    @include button-variant($button-default-color, $button-default-bg, $button-default-border-color);
+    @include button-size($button-padding-vartical, $button-padding-horizontal, $button-font-size, $line-height-base, $button-border-radius);
+    font-family: $button-font-family;
+    text-transform: uppercase;
+    &,
+    &:active,
+    &.active {
+        &:focus,
+        &.focus {
+            background-color: $button-default-active-bg;
+        }
+    }
+    &:hover,
+    &:focus,
+    &.focus {
+        background-color: $button-default-hover-bg;
+    }
+    &[disabled] {
+        @include button-variant($button-disabled-color, $button-disabled-bg, $button-disabled-border-color);
+    }
+    > span {
+        &.right {
+            margin-left: 7px;
+        }
+        &.left {
+            margin-right: 7px;
+        }
+    }
+}

@@ -1,0 +1,31 @@
+//
+// List
+// --------------------------------------------------
+
+
+// Remove the default list-style and left margin on list items (immediate children only).
+// This only applies to immediate children list items, meaning you will need to add the class for any nested lists as well.
+@mixin list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+// Place all list items on a single line with display: inline-block; and some light padding.
+@mixin list-inline {
+    list-style: none;
+
+    > li {
+        display: inline-block;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+}
+@mixin list-float($float, $whitespace-horizontal) {
+    @if $float == right {
+        margin-right: (floor(-($grid-gutter-width / 2)) - $whitespace-horizontal);
+        float: right;
+    }
+    @elseif $float == left {
+        margin-right: 0;
+        margin-left: (floor(-($grid-gutter-width / 2)) - $whitespace-horizontal);
+    }
+}

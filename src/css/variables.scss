@@ -1,51 +1,376 @@
-/**
- * components/variables.css
- *
- * Style variables.
- *
- */
+//
+// Variables
+// --------------------------------------------------
 
-// Color system
-// Options
-// Spacing
-// Body
-// Links
-// Paragraphs
-// Grid breakpoints
-// Grid containers
-// Grid columns
-// Components
-// Fonts
 
-$font-family-sans-serif: franklin-gothic-urw, sans-serif;
+//== Colors
+//
+//##
 
-// Tables
-// Buttons + Forms
-// Buttons
-// Forms
-// Form validation
-// Dropdowns
-// Z-index master list
-// Navs
-// Navbar
-// Pagination
-// Jumbotron
-// Cards
-// Tooltips
-// Popovers
-// Toasts
-// Badges
-// Modals
-// Alerts
-// Progress bars
-// List group
-// Image thumbnails
-// Figures
-// Breadcrumbs
-// Carousel
-// Spinners
-// Close
-// Code
-// Utilities
-// Printing
+//** Utility Colors
+$color-black:       #000;
+$color-white:       #fff;
 
+//** Project specific colors
+$color-night-rider: #303030;
+$color-monza:       #c7031e;
+$color-portica:     #f6eb61;
+$color-abbey:       #53585f;
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+//** Background color for `<body>`.
+$body-bg:               $color-white;
+//** Global text color on `<body>`.
+$text-color:            $color-night-rider;
+
+//** Global textual link color.
+$link-color:            $text-color;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      null;
+//** Link hover decoration.
+$link-hover-decoration: underline;
+
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$font-family-sans-serif:    'franklin-gothic-urw', sans-serif;
+$font-family-serif:         Georgia, 'Times New Roman', Times, serif;
+$font-family-base:          $font-family-sans-serif;
+
+$font-size:                 (16px, 14px);
+$font-size-base:            nth($font-size, 1);
+
+$font-weight-base:          100;
+
+//=== Headings
+
+$headings-font-family:      'franklin-gothic-urw-cond', sans-serif;
+
+$headings-font-size: (
+    h1:                     (33px, 28px),
+    h2:                     (27px, 24px),
+    h3:                     (23px, 20px),
+    h4:                     ((nth($font-size, 1) + 1), (nth($font-size, 2) + 1)),
+    h5:                     ((nth($font-size, 1)), (nth($font-size, 2))),
+    h6:                     ((nth($font-size, 1) - 1), (nth($font-size, 2) - 1)),
+);
+
+$h1-font-size:              (33px, 28px);
+$h2-font-size:              (27px, 24px);
+$h3-font-size:              (23px, 20px);
+$h4-font-size:              ((nth($font-size, 1) + 1), (nth($font-size, 2) + 1));
+$h5-font-size:              ((nth($font-size, 1)), (nth($font-size, 2)));
+$h6-font-size:              ((nth($font-size, 1) - 1), (nth($font-size, 2) - 1));
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base:          1.4;
+$line-collapse-height-base: 1.35;
+//** Computed 'line-height' (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-computed:      floor((nth($font-size, 2) * $line-height-base));
+
+
+//== Iconography
+//
+//## Specify custom location and filename of the included Glyphicons icon font. Useful for those including Bootstrap via Bower.
+
+//** Load fonts from this directory.
+$icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
+
+
+//== Grid system
+//
+//## Define your custom responsive grid.
+
+//** Number of columns in the grid.
+$grid-columns:              12; // bs-default: 12
+// Navbar collapse
+//** Point at which the navbar becomes uncollapse.
+$grid-float-breakpoint:     992px; // bs-default: $screen-sm-min (768px)
+$grid-float-breakpoint-max: ($grid-float-breakpoint - 1);
+
+
+//== Header
+//
+//##
+
+//### Basics of header
+
+//** Second value defines collapsed paddings
+$header-margin-top: (null, null);
+$header-margin-bottom: (50px, 80px);
+
+//### Header brand
+
+$brand-width:                     (200px, 235px);
+$brand-height:                    (null, null);
+
+$brand-padding:                   (null , 60px 0 0);
+
+$header-border-color:            $color-portica;
+
+//### Basics of navbar
+
+$navbar-margin:                   (15px 0, 90px -14px 0 0);
+
+$navbar-font-size:                (20px, 14px);
+$navbar-font-color:               $color-night-rider;
+
+$navbar-link-padding-horizontal:  (0, 14px);
+$navbar-link-padding-vertical:    (15px, 15px);
+
+//### Navbar toggle
+
+$navbar-toggle-vertical-align:         middle;
+$navbar-toggle-margin:                 0; // default: 8px 15px 8px 0
+$navbar-toggle-padding-horizontal:     15px; // bs-default: 10px
+$navbar-toggle-padding-vertical:       15px; // bs-default: 9px
+$navbar-toggle-bg:                     transparent; // default: transparent
+$navbar-toggle-hover-bg:               transparent; // bs-default: #ddd
+// ** Navbar toggle border
+$navbar-toggle-border-color:           transparent; // bs-default: #ddd
+// ** icon bars
+$navbar-toggle-icon-bar-bg:            $color-portica; // bs-default: #888
+$navbar-toggle-icon-bar-width:         30px; // bs-default: 22px
+$navbar-toggle-icon-bar-height:        3px; // bs-default: 2px
+$navbar-toggle-icon-bar-spacing:       4px; // bs-default: 4px
+$navbar-toggle-icon-bar-border-radius: 0; // bs-default: 1px
+
+$navbar-toggle-height-computed:        (($navbar-toggle-icon-bar-height * 3) + ($navbar-toggle-icon-bar-spacing * 2) + ($navbar-toggle-padding-vertical * 2) + 2);
+
+//### Header language bar
+
+$langbar-margin:                  (15px 0 10px, 15px -15px 0 0);
+
+$langbar-font-size:               (12px, 11px);
+
+$langbar-link-padding-horizontal: (null, 15px);
+$langbar-link-padding-vertical:   (null, 5px);
+
+
+//== Footer
+//
+//##
+
+// Basics of footer
+$footer-sticky:      true;
+$footer-height:      (null, 210px);
+
+//** Second value defines collapsed paddings
+$footer-margin-top: (60px, 100px);
+$footer-margin-bottom: (null, null);
+
+// Second value defines collapsed paddings
+$footer-padding: (0, 30px 0 20px);
+// $footer-padding: (
+//     top:             (60px, 30px),
+//     bottom:          (80px, 20px)
+// );
+
+$footer-bg:          $color-abbey;
+$footer-color:       $color-white;
+
+$footer-border-color: $color-portica;
+
+// Footer text
+$footer-font-family: 'franklin-gothic-urw-cond', sans-serif;
+$footer-font-size:   (14px, 12px);
+
+$footer-navbar-margin: (5px -15px -10px, -6px -15px 0);
+
+
+// $langbar-font-size:               (12px, 11px);
+//
+// $langbar-link-padding-horizontal: (null, 15px);
+// $langbar-link-padding-vertical:   (null, 5px);
+
+
+//== Navs
+//
+//##
+
+//=== Shared nav styles
+
+// Globalnav is default style for all navs.
+
+// Nav box model
+$nav-collapse-link-padding-horizontal: 15px;
+$nav-collapse-link-padding-vertical:   12px;
+$nav-link-padding-horizontal: 		   5px;
+$nav-link-padding-vertical:  	       0;
+
+// Nav Color
+$nav-link-color:             		   $color-night-rider;
+$nav-link-hover-color:       		   null;
+$nav-link-hover-bg:          		   transparent;
+$nav-link-active-color:      		   null;
+$nav-link-active-bg:         		   transparent;
+$nav-link-disabled-color:    		   lighten($nav-link-color, 6.5%);
+$nav-link-disabled-bg:       		   transparent;
+
+$nav-hover-transitions:                false;
+
+// Nav Text
+$nav-font-family:					   'franklin-gothic-urw-cond', sans-serif;
+$nav-collapse-font-size:               14px;
+$nav-font-size:                        12px;
+
+//=== Globalnav
+
+$global-navbar-bg:                     null; // Is set as an internal style through Craft
+
+$global-nav-collapse-float:            left;
+$global-nav-float:                     right;
+
+$global-navbar-margin-top:             -5px;
+$global-navbar-margin-bottom:          0;
+
+$global-navbar-collapse-margin-top:    5px;
+$global-navbar-collapse-margin-bottom: 30px;
+
+$global-nav-item-float:                none;
+$global-nav-item-align:                left;
+
+//=== Langbar
+
+// Nav box model
+// $nav-langbar-collapse-link-padding-horizontal: 15px;
+// $nav-langbar-collapse-link-padding-vertical:   12px;
+// $nav-langbar-link-padding-horizontal: 		   10px;
+// $nav-langbar-link-padding-vertical:  	       0;
+
+//=== Localnav
+
+// Localnav box model
+$local-nav-margin-top:                       -7px;
+$local-nav-margin-bottom:                    0;
+$local-nav-collapse-margin-top:              30px;
+$local-nav-collapse-margin-bottom:           60px;
+
+$local-nav-collapse-link-padding-vertical:   5px;
+$local-nav-collapse-link-padding-horizontal: 15px;
+
+$local-nav-link-padding-vertical:  	         3px;
+$local-nav-link-padding-horizontal:	         15px;
+
+// Localnav toggle
+$local-nav-toggle-float:			  left;
+$local-nav-toggle-padding-vertical:   9px; // default: 9px
+$local-nav-toggle-padding-horizontal: 10px; // default: 10px
+$local-nav-toggle-margin:             3px 15px 0 (-$local-nav-toggle-padding-horizontal); // default: 8px 15px 8px 0
+$local-nav-toggle-bg:                 transparent !default; // default: transparent
+$local-nav-toggle-hover-bg:           transparent !default; // default: #ddd
+//** Localnav toggle border
+$local-nav-toggle-border-color:       transparent !default; // default: #ddd
+
+//=== Footernav
+
+$footer-nav-margin-top:                       null;
+$footer-nav-margin-bottom:                    0;
+
+$footer-nav-collapse-margin-top:              null;
+$footer-nav-collapse-margin-bottom:           -15px;
+
+$footer-nav-link-padding-vertical:            12px;
+$footer-nav-link-padding-horizontal:          10px;
+$footer-nav-collapse-link-padding-vertical:   15px;
+$footer-nav-collapse-link-padding-horizontal: 10px;
+
+$footer-nav-font-size:                        10px;
+$footer-nav-collapse-font-size:               14px;
+
+//=== Langbar
+
+// $langbar-collapse-margin-top:    15px;
+// $langbar-collapse-margin-bottom: 0;
+
+
+//== Buttons
+//
+//##
+
+$button-padding-vartical:     10px;
+$button-padding-horizontal:   15px;
+
+$button-font-family:          $font-family-sans-serif;
+$button-font-size:            12px;
+$button-font-weight:          normal;
+
+$button-border-radius:        0;
+
+$button-default-color:        $text-color;
+$button-default-bg:           transparent;
+$button-default-border-color: $text-color;
+
+$button-default-hover-bg:     transparent;
+$button-default-active-bg:    transparent;
+
+$button-disabled-color:        lighten($color-black, 75%);
+$button-disabled-bg:           lighten($color-black, 93.5%);
+$button-disabled-border-color: lighten($color-black, 75%);
+
+
+//== Carousel
+//
+//##
+
+//$carousel-control-color:   $color-twine; // bs-default: #fff
+$carousel-control-width:   20px; // bs-default: 15%
+$carousel-control-opacity: 1; // bs-default: .5
+$carousel-control-bg:      none;
+
+//Carousel indicators
+$carousel-indicator-size:                16px;
+$carousel-indicator-active-size:         16px;
+
+$carousel-indicator-spacing:             4px;
+
+$carousel-indicator-bg:                  null;
+$carousel-indicator-active-bg:           null; // bs-default: #fff
+
+$carousel-indicator-border-color:        $carousel-indicator-bg; // bs-default: #fff
+$carousel-indicator-active-border-color: $carousel-indicator-active-bg;
+$carousel-indicator-border-radius:       0;
+
+
+//== Forms
+//
+//##
+
+$form-margin-top:    20px;
+$form-margin-bottom: 30px;
+
+$form-group-margin-bottom: 25px;
+
+//=== Label
+
+$form-label-margin-top:    0;
+$form-label-margin-bottom: 5px;
+$form-label-color:         $text-color;
+$input-padding-vertical:   6px;
+$input-padding-horizontal: 12px;
+$input-height:             ($line-height-computed + ($input-padding-vertical * 2) + 2);
+$input-bg:                 $color-white;
+$input-bg-disabled:        lighten($color-black, 93.5%);
+$input-color:              $color-abbey;
+$input-border:             lighten($color-black, 75%);
+$input-border-radius:      0;
+$input-border-focus:       $color-portica;
+
+$input-error-color:          $text-color;
+$input-error-border-color:   null;
+$input-error-feedback-color: $color-monza;
+
+$form-submit-margin-top:        15px;
+
+
+//== Alerts
+//
+//##
+
+$alert-border-radius: 0;
+$alert-font-family:   $font-family-sans-serif;

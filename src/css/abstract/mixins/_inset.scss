@@ -1,0 +1,160 @@
+//
+// Grid Mixins
+// --------------------------------------------------
+
+.inset12 {
+    margin-left: -940px;
+}
+
+.inset11 {
+    margin-left: -860px;
+}
+
+.inset10 {
+    margin-left: -780px;
+}
+
+.inset9 {
+    margin-left: -700px;
+}
+
+.inset8 {
+    margin-left: -620px;
+}
+
+.inset7 {
+    margin-left: -540px;
+}
+
+.inset6 {
+    margin-left: -460px;
+}
+
+.inset5 {
+    margin-left: -380px;
+}
+
+.inset4 {
+    margin-left: -300px;
+}
+
+.inset3 {
+    margin-left: -220px;
+}
+
+.inset2 {
+    margin-left: -140px;
+}
+
+.inset1 {
+    margin-left: -60px;
+}
+@media (min-width: 1200px) {
+    .inset12 {
+        margin-left: -1170px;
+    }
+
+    .inset11 {
+        margin-left: -1070px;
+    }
+
+    .inset10 {
+        margin-left: -970px;
+    }
+
+    .inset9 {
+        margin-left: -870px;
+    }
+
+    .inset8 {
+        margin-left: -770px;
+    }
+
+    .inset7 {
+        margin-left: -670px;
+    }
+
+    .inset6 {
+        margin-left: -570px;
+    }
+
+    .inset5 {
+        margin-left: -470px;
+    }
+
+    .inset4 {
+        margin-left: -370px;
+    }
+
+    .inset3 {
+        margin-left: -270px;
+    }
+
+    .inset2 {
+        margin-left: -170px;
+    }
+
+    .inset1 {
+        margin-left: -70px;
+    }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+    .inset12 {
+        margin-left: -724px;
+    }
+
+    .inset11 {
+        margin-left: -662px;
+    }
+
+    .inset10 {
+        margin-left: -600px;
+    }
+
+    .inset9 {
+        margin-left: -538px;
+    }
+
+    .inset8 {
+        margin-left: -476px;
+    }
+
+    .inset7 {
+        margin-left: -414px;
+    }
+
+    .inset6 {
+        margin-left: -352px;
+    }
+
+    .inset5 {
+        margin-left: -290px;
+    }
+
+    .inset4 {
+        margin-left: -228px;
+    }
+
+    .inset3 {
+        margin-left: -166px;
+    }
+
+    .inset2 {
+        margin-left: -104px;
+    }
+
+    .inset1 {
+        margin-left: -42px;
+    }
+}
+@media (max-width: 767px) {
+    [class*='inset'] {
+        display: block;
+        width: 100%;
+        margin-left: 0;
+        float: none;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+}

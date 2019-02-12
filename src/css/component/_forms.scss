@@ -1,0 +1,50 @@
+//
+// Contact Form
+// --------------------------------------------------
+
+
+label {
+    margin-top: $form-label-margin-top;
+    margin-bottom: $form-label-margin-bottom;
+    color: $form-label-color;
+    font-weight: 500;
+}
+
+form {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    .form-group-custom {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.form-control-custom {
+    height: $input-height;
+}
+
+.form-group-custom {
+    margin-bottom: $form-group-margin-bottom;
+    &.has-error {
+        .form-control-custom {
+            border-color: $input-error-border-color;
+        }
+        .form-control-feedback {
+            color: $input-error-feedback-color;
+        }
+    }
+    .errors {
+        @include list-unstyled;
+        display: inline-block;
+        margin-bottom: 0;
+        float: right;
+        color: $input-error-color;
+    }
+    label {
+        margin-top: $form-label-margin-top;
+        margin-bottom: $form-label-margin-bottom;
+        color: $form-label-color;
+    }
+}

@@ -1,0 +1,27 @@
+//
+// Page Home
+// --------------------------------------------------
+
+.home {
+    h1 {
+        margin-bottom: 18px;
+        font-size: 26px;
+        font-weight: 400;
+    }
+    section {
+        > .intro {
+            margin-bottom: 35px;
+            @media (min-width: $screen-sm-min) {
+                margin-bottom: 22px;
+            }
+        }
+        > .news-preview {
+            @media (min-width: $screen-sm-min) {
+                padding-left: 45px;
+                h2 {
+                    margin-bottom: 12px;
+                }
+            }
+        }
+    }
+}

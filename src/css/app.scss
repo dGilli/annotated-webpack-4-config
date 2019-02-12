@@ -1,9 +1,47 @@
 @import '~tailwindcss/preflight';
 @import '~tailwindcss/components';
 
-@import './variables.scss';
-@import './components/global.scss';
-@import './components/typography.scss';
-@import './components/webfonts.scss';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins';
+
+// Abstracts
+@import 'abstract/fonts';
+@import './variables';
+@import 'abstract/functions';
+@import 'abstract/mixins';
+
+// Vendors
+@import 'vendors/ie10-viewport-bug-workaround';
+
+// Base
+@import './base/base';
+@import 'base/reset';
+@import 'base/typography';
+
+// Layout
+@import 'layout/footer';
+@import 'layout/grid';
+@import 'layout/header';
+
+// Components
+@import 'component/articles';
+@import 'component/buttons';
+@import 'component/forms';
+@import 'component/listings';
+@import 'component/navigations';
+@import 'component/slider';
+
+// Pages
+@import 'page/company';
+@import 'page/contact';
+@import 'page/home';
+@import 'page/news';
+@import 'page/products';
+
+// Print
+//@import 'print/print';
+
+// Shame
+@import 'shame/shame';
 
 @import '~tailwindcss/utilities';

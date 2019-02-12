@@ -1,0 +1,17 @@
+//
+// Bootstrap Navbar Class Mixins
+// --------------------------------------------------
+
+
+@mixin navbar-float($float, $padding-horizontal) {
+    @if $float == right {
+        margin-right: (floor(-($grid-gutter-width / 2)) - $padding-horizontal);
+        margin-left: 0;
+        float: right;
+        text-align: right;
+    }
+    @elseif $float == left {
+        margin-right: 0;
+        margin-left: (floor(-($grid-gutter-width / 2)) - $padding-horizontal);
+    }
+}

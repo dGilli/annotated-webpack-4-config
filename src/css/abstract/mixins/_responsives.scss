@@ -1,0 +1,31 @@
+//
+// Responsives Mixins
+// --------------------------------------------------
+
+
+@mixin resp-property($property, $map) {
+    @each $keys, $values in $map {
+        #{$property}-#{$keys}: #{nth($values, 2)};
+        @media (min-width: $grid-float-breakpoint) {
+            #{$property}-#{$keys}: #{nth($values, 1)};
+        }
+    }
+}
+
+@mixin resp-margins($map) {
+    @each $keys, $values in $map {
+        padding-#{$keys}: #{nth($values, 2)};
+        @media (min-width: $grid-float-breakpoint) {
+            padding-#{$keys}: #{nth($values, 1)};
+        }
+    }
+}
+
+@mixin resp-paddings($map) {
+    @each $keys, $values in $map {
+        padding-#{$keys}: #{nth($values, 2)};
+        @media (min-width: $grid-float-breakpoint) {
+            padding-#{$keys}: #{nth($values, 1)};
+        }
+    }
+}

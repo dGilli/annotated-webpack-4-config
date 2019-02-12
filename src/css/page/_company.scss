@@ -1,0 +1,53 @@
+//
+// Page Company
+// --------------------------------------------------
+
+
+.management {
+    margin-bottom: 35px;
+    @media (max-width: $screen-xs-max) {
+        margin-bottom: 0 !important;
+    }
+    @media (min-width: $screen-sm-min) {
+        margin-top: 35px;
+    }
+    h5 {
+        font-size: 14px;
+    }
+    .grid {
+        margin-top: 35px;
+        &:first-child {
+            margin-top: 0;
+        }
+        @media (max-width: $screen-xs-max) {
+            > div {
+                margin-bottom: 35px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+    .col-3,
+    .col-4,
+    .col-6 {
+        padding-right: 45%;
+        @media (min-width: $screen-sm-min) {
+            padding-right: 15px;
+        }
+        @media (min-width: $screen-md-min) {
+            padding-right: 80px;
+        }
+        .profile-title {
+            font-size: 14px;
+            @media (min-width: $screen-sm-min) {
+                font-size: 12px;
+            }
+        }
+    }
+    ul {
+        margin-top: 10px;
+        padding-left: 0;
+        list-style: none;;
+    }
+}

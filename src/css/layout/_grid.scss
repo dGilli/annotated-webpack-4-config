@@ -1,0 +1,151 @@
+//
+// Grid
+// --------------------------------------------------
+
+
+//== Containers
+//
+//## Define grid containers
+
+// Global Navbar Container
+.global-navbar > .gn-container {
+    @include make-container;
+    @include op;
+}
+
+// Global Navbar Container
+.main > .content {
+    @include make-container;
+    @media (min-width: $screen-sm-min) {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+// Global Navbar Container
+.global-footer {
+    @include make-container;
+}
+
+
+//== Rows
+//
+//## Define grid rows
+
+.global-footer > .content {
+    @include make-row;
+}
+
+.block {
+    @include make-row;
+}
+
+.grid {
+    @include make-row;
+}
+
+.product-group > .product {
+    @include make-row;
+}
+
+.contact-form > .form-container {
+    @include make-row;
+}
+
+.home-carousel {
+    @include make-row;
+}
+
+.home-content {
+    @include make-row;
+}
+
+.section.address > .content {
+    @include make-row;
+}
+
+
+//== Columns
+//
+//## Define grid columns
+
+@include custom-columns(col-, padded);
+
+.global-footer .footer-block {
+    @include make-sm-column(4);
+    &.gf-navbar {
+        @include make-sm-column-push(8);
+    }
+    &.gf-address {
+        @include make-sm-column-pull(8);
+    }
+}
+
+.home-content {
+    .intro {
+        @include make-sm-column(7);
+    }
+    .news-preview {
+        @include make-sm-column(5);
+    }
+}
+
+.products .product-group {
+    p {
+        @include make-sm-column(10);
+        @include make-md-column(8);
+        padding-right: 0;
+        padding-left: 0;
+        float: none !important;
+    }
+    .product > .image {
+        @include make-sm-column(6);
+    }
+    .product > .info {
+        @include make-sm-column(5);
+        @include make-sm-column-offset(7);
+    }
+}
+
+.slider-overlay {
+    @include make-sm-column(6);
+}
+
+.news-overview,
+.jobs-overview {
+    @include make-sm-column(12);
+    @include make-md-column(8);
+    @include op;
+}
+
+.contact-form > .form-container {
+    .form-container {
+        @include make-sm-column(8);
+        @include make-md-column(6);
+    }
+    .button-group {
+        @include make-sm-column(4);
+        @include make-md-column(6);
+        @include make-sm-column-offset(8);
+        @include make-md-column-offset(6);
+        @media (min-width: $screen-sm-min) {
+            position: absolute;
+            bottom: 0;
+        }
+    }
+}
+
+.section.address {
+    address {
+        @include make-sm-column(4);
+        @include make-sm-column-push(8);
+        @include make-md-column(6);
+        @include make-md-column-push(6);
+    }
+    .maps {
+        @include make-sm-column(8);
+        @include make-sm-column-pull(4);
+        @include make-md-column(6);
+        @include make-md-column-pull(6);
+    }
+}

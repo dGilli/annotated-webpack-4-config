@@ -1,0 +1,27 @@
+// sass-lint:disable no-important
+
+//
+// Reset
+// --------------------------------------------------
+
+
+//== Bootstrap resets
+//
+//## Undo some of Bootstrap ludicrous styles
+
+.navbar-brand {
+    height: auto !important;
+}
+
+nav {
+    min-height: auto !important;
+    border: 0 !important;
+}
+
+.navbar {
+    border-radius: 0 !important;
+}
+
+.carousel-control {
+    background-image: none !important;
+}

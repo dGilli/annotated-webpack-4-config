@@ -1,0 +1,42 @@
+//
+// Page News
+// --------------------------------------------------
+
+
+body.news {
+    .current-news {
+        margin-bottom: 35px;
+    }
+    .archived-news h2 {
+        font-size: 20px;
+        @media (min-width: $screen-sm-min) {
+            font-size: 20px;
+        }
+        > a {
+            &:hover {
+                text-decoration: underline !important;
+            }
+            &:focus {
+                color: $text-color;
+                text-decoration: none;
+            }
+            &::after {
+                display: inline-block;
+                position: relative;
+                margin-left: 7px;
+                font-family: 'Glyphicons Halflings';
+                font-size: 14px;
+                font-style: normal;
+                font-weight: normal;
+                line-height: 1;
+                content: '\e252';
+                box-sizing: border-box;
+            }
+            &.collapsed {
+                &::after {
+                    content: '\e250';
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,139 @@
+//
+// Grid Mixins
+// --------------------------------------------------
+
+
+// Fluid container until breakpoint
+@mixin container-capped($cap) {
+    @include container-fixed;
+    margin-right: auto;
+    margin-left: auto;
+    float: none;
+    @if $cap == 'xs' {
+        @media (min-width: $screen-xs-min) {
+            width: $container-xs;
+        }
+    } @else if $cap == 'sm' {
+        @media (min-width: $screen-sm-min) {
+            width: $container-sm;
+        }
+    } @else if $cap == 'md' {
+        @media (min-width: $screen-md-min) {
+            width: $container-md;
+        }
+    } @else if $cap == 'lg' {
+        @media (min-width: $screen-lg-min) {
+            width: $container-lg;
+        }
+    }
+}
+
+@mixin make-container($declaration: '') {
+    @include container-fixed;
+    @media (min-width: $screen-sm-min) {
+        width: $container-sm unquote($declaration);
+    }
+    @media (min-width: $screen-md-min) {
+        width: $container-md unquote($declaration);
+    }
+    @media (min-width: $screen-lg-min) {
+        width: $container-lg unquote($declaration);
+    }
+}
+
+@mixin make-container-sm {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: ($grid-gutter-width / 2);
+    padding-left: ($grid-gutter-width / 2);
+    @media (min-width: $screen-sm-min) {
+        width: $container-sm;
+    }
+    @media (min-width: $screen-md-min) {
+        width: $container-md;
+    }
+    @media (min-width: $screen-lg-min) {
+        width: $container-lg;
+    }
+}
+@mixin make-container-md {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: ($grid-gutter-width / 2);
+    padding-left: ($grid-gutter-width / 2);
+    @media (min-width: $screen-md-min) {
+        width: $container-md;
+    }
+    @media (min-width: $screen-lg-min) {
+        width: $container-lg;
+    }
+}
+@mixin make-container-lg {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: ($grid-gutter-width / 2);
+    padding-left: ($grid-gutter-width / 2);
+    @media (min-width: $screen-lg-min) {
+        width: $container-lg;
+    }
+}
+
+
+//== Omit column padding
+//
+//##
+
+@mixin omit-padding($declaration: '') {
+    padding-right: 0 unquote($declaration);
+    padding-left: 0 unquote($declaration);
+}
+
+// 'omit-column-padding short-name
+@mixin op($declaration: '') {
+    @include omit-padding($declaration);
+}
+
+@mixin omit-margin($declaration: '') {
+    margin-right: 0 unquote($declaration);
+    margin-left: 0 unquote($declaration);
+}
+
+// 'omit-column-padding short-name
+@mixin om($declaration: '') {
+    @include omit-margin($declaration);
+}
+
+@mixin grid-gutter-padding($side: null) {
+    @if $side == 'left' {
+        padding-left: ($grid-gutter-width / 2);
+    } @else if $side == 'right' {
+        padding-right: ($grid-gutter-width / 2);
+    } @else {
+        padding-right: ($grid-gutter-width / 2);
+        padding-left: ($grid-gutter-width / 2);
+    }
+}
+
+//== Custom column grid
+//
+//## Define columns with a custom class
+
+@mixin custom-columns($class, $padded: false) {
+    @for $i from 0 through $grid-columns {
+        @if ($i > 0) {
+            .#{$class}#{$i} {
+                width: 100%;
+                @if $padded == 'padded' {
+                    @include grid-gutter-padding;
+                } @else {
+                    padding-right: 0;
+                    padding-left: 0;
+                }
+                @media (min-width: $grid-float-breakpoint) {
+                    width: percentage(($i / $grid-columns));
+                    float: left;
+                }
+            }
+        }
+    }
+}

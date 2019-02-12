@@ -27,10 +27,8 @@
         <!--# endif -->
     {% endblock %}
 </head>
-<body {% if bodyClass is defined %}class="{{ bodyClass }}"{% endif %}>
-<div id="app">
-    {% block body %}{% endblock %}
-</div>
+<body {% if bodyClass is defined %}class="{{ bodyClass }}"{% endif %} id="app">
+{% block body %}{% endblock %}
 
 {% block foot %}
     {{ craft.twigpack.includeSafariNomoduleFix() }}

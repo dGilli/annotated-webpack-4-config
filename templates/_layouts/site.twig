@@ -12,11 +12,6 @@
     {% set title = (entry.seoTitle ?? entry.title)|title %}
 {% endif %}
 
-{# Set the `title` variable to the nav item that matches the first segment #}
-{#{% if nav[bodyClass] is defined %}#}
-    {#{% set title %}{% if title is defined and title %}{{ title }} - {% endif %}{{ nav[bodyClass].title }}{% endset %}#}
-{#{% endif %}#}
-
 {% block body %}
     <header id="header" role="banner">
         {% block header %}
@@ -31,13 +26,9 @@
                         </button>
 
                         <div class="navbar-brand" id="gnBrand">
-                            {#{% if craft.config.domain == 'ch' %}#}
-                                {#{% set brandPath = '/assets/ch/brand/christundheiri_logo_' ~ locale.id ~ '.png' %}#}
-                            {#{% elseif craft.config.domain == 'gh' %}#}
-                                {#{% set brandPath = '/assets/gh/brand/grieshaber_logo_' ~ locale.id ~ '.png' %}#}
-                            {#{% endif %}#}
-
-                            {#<a href="{{ siteUrl }}"><img src="{{ brandPath }}" alt=""></a>#}
+                            <a href="{{ currentSite.baseUrl }}">
+                                <img class="h-full" src="{{ craft.twigpack.getModuleUri('img/' ~ currentSite.handle[:2]|replace({'ch': 'christundheiri', 'gh': 'grieshaber'}) ~'_logo_' ~ craft.app.locale ~ '.png') }}" />
+                            </a>
                         </div>
                     </div>
 
@@ -51,11 +42,7 @@
                                     .all() %}
 
                                 {% for item in nav if item.showInNav.contains('primary') %}
-                                    {% if item.type.handle == 'jobs' and craft.entries().section('jobs').count() %}
-                                        <li {{ (entry is defined and item.id == entry.id) or (entryOf is defined and entryOf == item.slug) ? 'class="active"' }}>
-                                            <a href="{{ item.getUrl }}" title="{{ naviitemitemem.title|lower }}">{{ item.title|upper }}</a>
-                                        </li>
-                                    {% else %}
+                                    {% if item.type.handle != 'jobs' or craft.entries().section('jobs').count() %}
                                         <li {{ (entry is defined and item.id == entry.id) or (entryOf is defined and entryOf == item.slug) ? 'class="active"' }}>
                                             <a href="{{ item.getUrl }}" title="{{ item.title|lower }}">{{ item.title|upper }}</a>
                                         </li>
@@ -65,13 +52,18 @@
                             </ul>
 
                             <ul class="nav navbar-nav gn-langbar" id="gnLangbar">
-                                {#{% set locales = craft.LocaleHelper.siteLocales() %}#}
-                                {#{% for locale in locales %}#}
-                                    {#<li {{ locale.active ? 'class="active"' }}>#}
-                                        {#<a href="{{ locale.url }}"  title="{{ locale.nativeName|lower }}">{{ locale.nativeName|upper }}</a>#}
-                                    {#</li>#}
-                                {#{% endfor %}#}
+
+                                {% for site in currentSite.group.sites %}
+
+                                    {% set locale = craft.app.i18n.getLocaleById(site.language) %}
+
+                                    <li{{ craft.app.locale == locale.id ? ' class="active"' }}>
+                                        <a href="{{ site.baseUrl }}" data-content="{{ locale.nativeName|upper }}">{{ locale.nativeName|upper }}</a>
+                                    </li>
+                                {% endfor %}
+
                             </ul>
+
                         </div>
                     </div>
                 </div>
@@ -83,7 +75,75 @@
         {% block main %}{% endblock %}
     </main>
 
-    <footer id="footer">
-        {% block footer %}{% include '_includes/footer.twig' ignore missing %}{% endblock %}
+    <footer class="footer" id="footer">
+        {% block footer %}
+            <div class="global-footer" id="globalFooter">
+                <div class="content">
+                    <div class="footer-block gf-navbar">
+
+                        {% set footerNav = craft.entries()
+                            .section('sitestructure')
+                            .level(1)
+                            .all() %}
+
+                        {% if footerNav %}
+                            <ul class="nav navbar-nav" id="gfNavbar">
+
+                                {% for item in footerNav if item.showInNav.contains('tertiary') %}
+                                    {% if item.type.handle != 'jobs' or craft.entries().section('jobs').count() %}
+                                        <li {{ (entry is defined and item.id == entry.id) or (entryOf is defined and entryOf == item.slug) ? 'class="active"' }}>
+                                            <a href="{{ item.getUrl }}" title="{{ item.title|lower }}">{{ item.title|upper }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+
+                            </ul>
+                        {% endif %}
+
+                        <div class="group-notice">
+                            {{ "A member of the"|t }}<br>
+                            <a href=""><span class="font-bold">CHRIST & HEIRI</span> GROUP</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-block gf-certificates">
+                        <div class="content">
+                            <img src="{{ craft.twigpack.getModuleUri('img/' ~ currentSite.handle[:2]|replace({'ch': 'christundheiri', 'gh': 'grieshaber'}) ~'_footer_iso.png') }}">
+                            <p>{{ footer.isoNotice|upper|nl2br|raw }}</p>
+                        </div>
+                    </div>
+
+                    <div class="footer-block gf-address">
+
+                        <ul class="list-reset">
+                            <li>{{ contact.addressName|upper }}</li>
+                            <li>{{ contact.addressLine1|upper }}</li>
+
+                            {% if contact.addressLine2 %}
+                                <li>{{ contact.addressLine2|upper }}</li>
+                            {% endif %}
+
+                            <li>{{ contact.addressZip|upper }}&nbsp;{{ contact.addressCity|upper }}</li>
+
+                            {% if contact.addressCountry %}
+                                <li>{{ contact.addressCountry|upper }}</li>
+                            {% endif %}
+
+                            <li>
+                                {{ "Phone"|t|upper }}
+                                <a href="tel:{{ contact.phone }}">{{ contact.phone }}</a>
+                            </li>
+
+                            <li>
+                                {{ "Email"|t|upper }}
+                                <a href="tel:{{ contact.email }}">{{ contact.email|upper }}</a>
+                            </li>
+                        </ul>
+
+                        <p class="copyright" id="copyright">&copy;&nbsp;{{ now.year }}, {{ footer.copyrightNotice|upper }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
     </footer>
 {% endblock %}

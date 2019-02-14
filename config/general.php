@@ -47,7 +47,6 @@ return [
         'custom' => [
             'craftEnv' => CRAFT_ENVIRONMENT,
             'staticAssetsVersion' => 1,
-            'defaultLocale' => 'de', // Locale needs to be present for every site
         ]
     ],
 
@@ -61,6 +60,8 @@ return [
         'isSystemLive' => true,
         // Aliases parsed in sites’ settings, volumes’ settings, and Local volumes’ settings
         'aliases' => [
+            '@chUrl' => 'https://christundheiri.com/',
+            '@ghUrl' => 'https://grieshaber-feinmechanik.de/',
         ],
         // Custom site-specific config settings
         'custom' => [
@@ -77,6 +78,8 @@ return [
         'isSystemLive' => false,
         // Aliases parsed in sites’ settings, volumes’ settings, and Local volumes’ settings
         'aliases' => [
+            '@chUrl' => 'https://staging.christundheiri.com/',
+            '@ghUrl' => 'https://staging.grieshaber-feinmechanik.de/',
         ],
         // Custom site-specific config settings
         'custom' => [
@@ -93,6 +96,8 @@ return [
         'isSystemLive' => true,
         // Aliases parsed in sites’ settings, volumes’ settings, and Local volumes’ settings
         'aliases' => [
+            '@chUrl' => 'http://christundheiri.local/',
+            '@ghUrl' => 'http://grieshaber-feinmechanik.local/',
         ],
         // Custom site-specific config settings
         'custom' => [

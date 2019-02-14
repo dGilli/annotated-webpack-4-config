@@ -10,7 +10,10 @@
 // Global Navbar Container
 .global-navbar > .gn-container {
     @include make-container;
-    @include op;
+
+    @media (max-width: $screen-xs-max) {
+        @include op;
+    }
 }
 
 // Global Navbar Container
@@ -33,7 +36,10 @@
 //## Define grid rows
 
 .global-footer > .content {
-    @include make-row;
+    @media (max-width: $screen-xs-max) {
+        margin-right: ($grid-gutter-width / 2);
+        margin-left: ($grid-gutter-width / 2);
+    }
 }
 
 .block {

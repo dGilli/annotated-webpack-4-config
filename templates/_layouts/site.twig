@@ -13,7 +13,7 @@
 {% endif %}
 
 {% block body %}
-    <header id="header" role="banner">
+    <header class="header" id="header" role="banner">
         {% block header %}
             <nav class="navbar global-navbar" id="globalNavbar">
                 <div class="gn-container">
@@ -58,7 +58,7 @@
                                     {% set locale = craft.app.i18n.getLocaleById(site.language) %}
 
                                     <li{{ craft.app.locale == locale.id ? ' class="active"' }}>
-                                        <a href="{{ site.baseUrl }}" data-content="{{ locale.nativeName|upper }}">{{ locale.nativeName|upper }}</a>
+                                        <a href="{{ alias(site.baseUrl) }}" data-content="{{ locale.nativeName|upper }}">{{ locale.nativeName|upper }}</a>
                                     </li>
                                 {% endfor %}
 
@@ -72,7 +72,9 @@
     </header>
 
     <main role="main">
-        {% block main %}{% endblock %}
+        <div class="container">
+            {% block main %}{% endblock %}
+        </div>
     </main>
 
     <footer class="footer" id="footer">
@@ -140,7 +142,7 @@
                             </li>
                         </ul>
 
-                        <p class="copyright" id="copyright">&copy;&nbsp;{{ now.year }}, {{ footer.copyrightNotice|upper }}</p>
+                        <p class="copyright" id="copyright">&copy;&nbsp;{{ now|date('Y') }}, {{ footer.copyrightNotice|upper }}</p>
                     </div>
                 </div>
             </div>

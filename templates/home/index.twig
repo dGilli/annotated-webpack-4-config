@@ -1,13 +1,67 @@
 {# @var craft \craft\web\twig\variables\CraftVariable #}
-{#
- # The homepage template
- # ------------------------
- #}
 
 {% extends "_layouts/site.twig" %}
 
-{% import '_macros/laysizes.twig' as lazysizes %}
-
+{% import '_macros/lazyImage.twig' as lazyImage %}
 
 {% block main %}
+    <section class="section home-carousel">
+        <div id="carousel" class="carousel slide carousel-custom" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                {% for block in entry.homeSlider %}
+                    <div class="item item-custom{{ loop.index0 == 0 ? ' active' }}">
+
+                        {% if loop.first %}
+                            {% set imageWidths = [900, 1100, 1300, 1800, 2300] %}
+                        {% else %}
+                            {% set imageWidths = [1300, 1800, 2300] %}
+                        {% endif %}
+
+                        {% for image in block.slideImage %}
+                            <img class="w-full lazyload" {{ lazyImage.srcset('fit', imageWidths, block.slideImage, loop.index0) }} alt="{{ image.title }}">
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% for image in entry.imageSliderOverlay %}
+            <img class="lazyload" {{ lazyImage.srcset('fit', [525, 750, 1000, 1300, 1800, 2300], entry.imageSliderOverlay, loop.index0) }} alt="{{ image.title }}">
+        {% endfor %}
+    </section>
+
+    <section class="section home-content">
+        <div class="intro">
+            <h1>{{ entry.pageHeading|upper }}</h1>
+            {{ entry.text }}
+        </div>
+        <div class="news-preview">
+
+            {% set articles = craft.entries()
+                .section('news')
+                .showOnHome(1)
+                .limit(2)
+                .all() %}
+
+            {% if articles|length %}
+                <h2>{{ 'News'|t|upper }}</h2>
+                {% for entry in articles %}
+                    <article class="news-article">
+                        <a href="{{ entry.url }}">
+                            {{ entry.postDate|date('j. F Y') }}<br />
+                            <h4>{{ entry.title }}</h4><br>
+                            {{ entry.summary }}
+                        </a>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <h2>{{ entry.newsPlaceholderTitle }}</h2>
+                <article>
+                    {{ entry.placeholderLink|length ? '<a href="' ~ hrefFormat.filterURI(entry.url) ~ '">' }}
+                    {{ entry.newsPlaceholderText }}
+                    {{ entry.placeholderLink|length ? '</a>' }}
+                </article>
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}

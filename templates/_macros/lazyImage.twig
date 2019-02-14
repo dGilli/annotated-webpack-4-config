@@ -1,0 +1,33 @@
+{% macro srcset(mode, widths, img, i) %}
+    {% set transforms = [] %}
+
+    {% for width in widths if img[i].width > width %}
+        {% set transforms = transforms|merge([width]) %}
+    {% endfor %}
+
+    {% if widths[(transforms|length)] is defined and widths|length > transforms|length %}
+        {% set transforms = transforms|merge([attribute(widths, transforms|length)]) %}
+    {% endif %}
+
+    src="{% set srcTransform = {mode: mode, width: min(transforms)} %}{{ img[i].getUrl(srcTransform) }}"
+    data-srcset="{% for width in transforms %}{% set srcsetTransform = {mode: mode, width: width} %}{{ img[i].getUrl(srcsetTransform) }} {{ width }}w{{ not loop.last ? ', ' }}{% endfor %}"
+    data-sizes="auto"
+{% endmacro %}
+
+
+
+{% macro bgset(mode, widths, img, i) %}
+    {% set transforms = [] %}
+
+    {% for width in widths if img[i].width > width %}
+        {% set transforms = transforms|merge([width]) %}
+    {% endfor %}
+
+    {% if widths[(transforms|length)] is defined and widths|length > transforms|length %}
+        {% set transforms = transforms|merge([attribute(widths, transforms|length)]) %}
+    {% endif %}
+
+    style="{% set bgImg = {mode: mode, width: min(transforms)} %}background-image:url('{{ img[i].getUrl(bgImg) }}');"
+    data-bgset="{% for width in transforms %}{% set srcsetTransform = {mode: mode, width: width} %}{{ img[i].getUrl(srcsetTransform) }} {{ width }}w{{ not loop.last ? ', ' }}{% endfor %}"
+    data-sizes="auto"
+{% endmacro %}

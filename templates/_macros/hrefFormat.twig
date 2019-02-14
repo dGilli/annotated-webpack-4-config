@@ -1,0 +1,33 @@
+{% macro short(url) %}
+
+    {% set url = url|replace({'www.': ''}) %}
+
+    {% if url|slice(0,5) == 'https' %}
+        {{ url|slice(8,(url|length-5)) }}
+    {% elseif url| slice(0,4) == 'http' %}
+        {{ url|slice(7,(url|length-4)) }}
+    {% else %}
+        {{ url }}
+    {% endif %}
+
+{% endmacro %}
+
+{% macro print(url) %}
+
+    {% if url|slice(0,5) == 'https' %}
+        {{ url|slice(8,(url|length-5)) }}
+    {% elseif url| slice(0,4) == 'http' %}
+        {{ url|slice(7,(url|length-4)) }}
+    {% else %}
+        {{ url }}
+    {% endif %}
+
+{% endmacro %}
+
+{% macro link(url) %}
+
+    {{ url|slice(0,4) == 'http' ? url : 'http://' ~ url }}
+
+{% endmacro %}
+
+{#{% macro filterURI(url) %}{{ url|replace('/\home$/', '')|replace(craft.app.locale ~ '/ch/', craft.app.locale ~ '/')|replace(craft.app.locale ~ '/gh/', craft.i18n.getCurrentLocale() ~ '/') }}{% endmacro %}#}

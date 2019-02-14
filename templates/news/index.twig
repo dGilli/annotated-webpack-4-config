@@ -1,0 +1,63 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+
+{% extends "_layouts/site.twig" %}
+
+{% block main %}
+    {% set currentArticles = [] %}
+    {% set oldArticles = [] %}
+
+    {% for entry in craft.entries.section('news').after(now|date_modify("-1 year")) if entry.domain.contains(craft.config.domain) %}
+        {% set currentArticles = currentArticles|merge([entry]) %}
+    {% endfor %}
+
+    {% for entry in craft.entries.section('news').before(now|date_modify("-1 year")) if entry.domain.contains(craft.config.domain) %}
+        {% set oldArticles = oldArticles|merge([entry]) %}
+    {% endfor %}
+
+    <h1>{{ entry.pageHeading|upper }}</h1>
+
+    <section class="section news-overview">
+
+        {% if currentArticles|length %}
+            <div class="current-news">
+
+                <h2>{{ 'tlCurrentNews'|t|upper }}</h2>
+
+
+                <div class="content">
+                    {% for entry in currentArticles %}
+
+                        <article class="news-article">
+                            <a href="{{ entry.url }}">
+                                {{ entry.postDate|date('j. F Y') }}<br />
+                                <h4>{{ entry.title }}</h4><br>
+                                {{ entry.summary }}
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <p>{{ "There are currently no new news articles."|t }}</p>
+            <a href="{{ alias(currentSite.baseUrl) }}" class="button mt-3">{{ 'Back to home'|t|upper }}</a>
+        {% endif %}
+
+        {% if oldArticles|length %}
+            <div class="archived-news">
+                <h2><a class="collapsed" role="button" data-toggle="collapse" href="#collapseArchivedNews" aria-expanded="false" aria-controls="collapseArchivedNews">{{ 'tlOlderNews'|t|upper }}</a></h2>
+                <div class="content collapse" id="collapseArchivedNews">
+                    {% for entry in oldArticles %}
+                        <article class="news-article">
+                            <a href="{{ entry.url }}">
+                                {{ entry.postDate|date('j. F Y') }}<br />
+                                <h4>{{ entry.title }}</h4>
+                                {{ entry.summary }}
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+    </section>
+{% endblock %}

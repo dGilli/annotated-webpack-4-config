@@ -2,8 +2,8 @@
 
 {# Redirect root url to default locale #}
 
-{% if craft.app.request.segments is empty and entry is not defined %}
-    {% redirect craft.app.config.general.custom.defaultLocale 301 %}
+{% if currentSite.handle == 'default' %}
+    {% redirect craft.app.sites.getSiteByHandle('default').language 301 %}
 {% endif %}
 
 {# Route sitestructure templates #}

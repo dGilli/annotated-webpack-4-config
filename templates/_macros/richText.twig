@@ -1,0 +1,3 @@
+{% macro route(field) %}
+    {{ field|replace(siteUrl ~ craft.config.domain ~ '/', siteUrl)|raw }}
+{% endmacro %}

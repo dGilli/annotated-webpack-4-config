@@ -1,0 +1,116 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+
+{% extends "_layouts/site.twig" %}
+
+{% import '_macros/hrefFormat.twig' as hrefFormat %}
+
+{% block main %}
+    <h1>{{ entry.pageHeading|upper }}</h1>
+
+    {% if entry.formShow %}
+        <section class="section contact-form">
+            {% macro errorList(errors, errorType) %}
+
+                {% if errors and errorType.contains('errorText') %}
+                    <ul class="errors">
+                        {% for error in errors %}
+                            <li>{{ error|t }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if errors and errorType.contains('errorIcons') %}
+                    <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                {% endif %}
+
+            {% endmacro %}
+
+            {% from _self import errorList %}
+
+            <div class="form-container" id="contactForm">
+
+                {% if not craft.app.request.getQueryParam('success') or entry.formShowAfterSubmit %}
+                    <form class="form" method="post" action="{{ craft.app.request.absoluteUrl() }}" accept-charset="UTF-8">
+                        {{ getCsrfInput() }}
+                        <input type="hidden" name="action" value="contactForm/sendMessage">
+                        <input type="hidden" name="redirect" value="{{ craft.app.request.absoluteUrl() }}?success=true#contactForm">
+
+                        <div class="form-container">
+                            <div class="form-group form-group-custom has-feedback{{ message is defined and message.getErrors('fromName') ? ' has-error' }}">
+                                <label for="fromName">{{ "Name"|t|upper }}</label>
+                                <input type="text" class="form-control form-control-custom" id="fromName" type="text" name="fromName" value="{% if message is defined %}{{ message.fromName }}{% endif %}">
+                                {{ message is not defined ? '<span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>' }}
+                                {{ message is defined and message ? errorList(message.getErrors('fromName'), entry.formErrorType) }}
+                            </div>
+
+                            <div class="form-group form-group-custom has-feedback{{ message is defined and message.getErrors('fromEmail') ? ' has-error' }}">
+                                <label for="fromEmail">{{ "Email"|t|upper }}</label>
+                                <input type="text" class="form-control form-control-custom" id="fromEmail" type="text" name="fromEmail" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}">
+                                {{ message is not defined ? '<span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>' }}
+                                {{ message is defined and message ? errorList(message.getErrors('fromEmail'), entry.formErrorType) }}
+                            </div>
+
+                            <div class="form-group form-group-custom has-feedback{{ message is defined and message.getErrors('subject') ? ' has-error' }}">
+                                <label for="subject">{{ "Subject"|t|upper }}</label>
+                                <input type="text" class="form-control form-control-custom" id="subject" type="text" name="subject" value="{% if message is defined %}{{ message.subject }}{% endif %}">
+                                {{ message is not defined ? '<span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>' }}
+                                {{ message is defined and message ? errorList(message.getErrors('subject'), entry.formErrorType) }}
+                            </div>
+
+                            <div class="form-group form-group-custom has-feedback{{ message is defined and message.getErrors('message') ? ' has-error' }}">
+                                <label for="message">{{ "Message"|t|upper }}</label>
+                                <textarea type="text" class="form-control form-control-custom" rows="5" cols="40" id="message" name="message">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
+                                {{ message is not defined ? '<span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>' }}
+                                {{ message is defined and message ? errorList(message.getErrors('message'), entry.formErrorType) }}
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            {% if craft.app.request.getQueryParam('success') %}
+                                <div class="alert alert-success" role="alert">{{ 'tlSendSuccess'|t }}</div>
+                            {% endif %}
+                            <button class="button form-submit" type="submit" {{ craft.app.request.getQueryParam('success') ? 'disabled' }}>{{ 'tlSend'|t|upper }}{% if craft.app.request.getQueryParam('success') %}<span class="glyphicon glyphicon-ok right" aria-hidden="true"></span>{% endif %}</button>
+                        </div>
+                    </form>
+                {% endif %}
+
+            </div>
+        </section>
+    {% endif %}
+
+    <section class="section address">
+        <h2>{{ 'Address'|t|upper }}</h2>
+
+        <ul class="list-reset ">
+            <li>{{ contact.addressName|upper }}</li>
+            <li>{{ contact.addressLine1|upper }}</li>
+
+            {% if contact.addressLine2 %}
+                <li>{{ contact.addressLine2|upper }}</li>
+            {% endif %}
+
+            <li>{{ contact.addressZip|upper }}&nbsp;{{ contact.addressCity|upper }}</li>
+
+            {% if contact.addressCountry %}
+                <li>{{ contact.addressCountry|upper }}</li>
+            {% endif %}
+
+            <li>
+                {{ "Phone"|t|upper }}
+                <a href="tel:{{ contact.phone }}">{{ contact.phone }}</a>
+            </li>
+
+            <li>
+                {{ "Email"|t|upper }}
+                <a href="tel:{{ contact.email }}">{{ contact.email|upper }}</a>
+            </li>
+        </ul>
+
+        {#{% if entry.showMap %}#}
+            {#<div class="embed-container maps" id="gmap">#}
+                {#<iframe src="{{ entry.gmapsEmbedCode }}" width="100%" height="300" frameborder="0" style="border:0; margin-bottom:-5px" allowfullscreen></iframe>#}
+            {#</div>#}
+        {#{% endif %}#}
+
+    </section>
+{% endblock %}

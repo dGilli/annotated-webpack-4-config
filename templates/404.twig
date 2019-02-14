@@ -1,0 +1,9 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+
+{% extends "_layouts/site.twig" %}
+
+{% block main %}
+    <h1>{{ 'Page not found'|t|upper }}</h1>
+
+    <a href="{{ alias(currentSite.baseUrl) }}" class="button">{{ 'Back to home'|t|upper }}</a>
+{% endblock %}

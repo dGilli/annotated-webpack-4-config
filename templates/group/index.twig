@@ -1,0 +1,191 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+
+{% extends "_layouts/site.twig" %}
+
+{% import '_macros/lazyImage.twig' as lazyImage %}
+
+{#{% if entry.groupContent.type('blockMap')|length %}#}
+    {#{% do view.registerJsFile("https://maps.googleapis.com/maps/api/js?key=AIzaSyAdM-p7Db0Z471YjhfiMg6mjqBnXQ9fdhM") %}#}
+{#{% endif %}#}
+
+{% block main %}
+    <h1>{{ entry.pageHeading|upper }}</h1>
+
+    {% for block in entry.groupContent.all() %}
+
+        {% if loop.first and (block.type == 'blockText' or block.type == 'blockImage') %}
+            <div class="block">
+        {% elseif (block.type == 'blockText' or block.type == 'blockImage') and (block.prev.type != 'blockText' and block.prev.type != 'blockImage') %}
+            <div class="block">
+        {% endif %}
+
+        {% if block.type == 'blockHeading1' %}
+            <h2>{{ block.heading|upper }}</h2>
+        {% elseif block.type == 'blockHeading2' %}
+            <h3>{{ block.heading|upper }}</h3>
+        {% elseif block.type == 'blockText' %}
+            <div class="col-{{ block.width }}">
+                {{ block.text }}
+            </div>
+        {% elseif block.type == 'blockImage' %}
+            <div class="col-{{ block.width }}">
+
+                {% set colWidths = {
+                    4:  [ 389,  293, 209 ],
+                    6:  [ 585,  455, 330 ],
+                    8:  [ 750,  616, 450 ],
+                    12: [ 1170, 940, 690 ]
+                } %}
+
+                {% set imgWidths = [] %}
+                {% for width in colWidths[block.width|escape] %}
+                    {% set imgWidths = imgWidths|merge([width * 2]) %}
+                {% endfor %}
+                {% set imgWidths = imgWidths|merge(colWidths[block.width|escape])|merge([1050, 525]) %}
+
+                {% for image in block.asset %}
+                    {% if image.kind == 'image' %}
+                        <img class="lazyload" {{ lazyImage.srcset('fit', imgWidths, block.asset, loop.index0) }} alt="{{ block.caption|length ? block.caption|striptags : image.title }}">
+                        <p class="caption">{{ block.caption }}</p>
+                    {% elseif image.kind == 'video' %}
+                        <video autoplay loop muted playsinline>
+                            <source src="{{ image.url }}" type="video/mp4">
+                            Your browser does not support the videos.
+
+
+                            <p>Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Accusantium amet aperiam, at
+                                autem cumque enim, iusto magnam maiores minus
+                                nam nihil nisi possimus praesentium sequi soluta
+                                vel vero, voluptates voluptatibus!</p>
+                        </video>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+        {% elseif block.type == 'blockFlowText' %}
+            <div class="block">
+                <div class="col-12">
+
+                    {% set colWidths = {
+                        4:  [ 389,  293, 209 ],
+                        6:  [ 585,  455, 330 ],
+                        8:  [ 750,  616, 450 ],
+                        12: [ 1170, 940, 690 ]
+                    } %}
+
+                    {% set imgWidths = [] %}
+                    {% for width in colWidths[block.assetWidth|escape] %}
+                        {% set imgWidths = imgWidths|merge([width * 2]) %}
+                    {% endfor %}
+                    {% set imgWidths = imgWidths|merge(colWidths[block.assetWidth|escape])|merge([1050, 525]) %}
+
+                    {% for image in block.asset %}
+                        <div class="flowtext-asset {{ block.assetPosition }} col-{{ block.assetWidth }}">
+                            {% if image.kind == 'image' %}
+                                <img class="lazyload" {{ lazyImage.srcset('fit', imgWidths, block.asset, loop.index0) }} alt="{{ block.caption|length ? block.caption|striptags : image.title }}">
+                                <p class="caption">{{ block.caption }}</p>
+                            {% elseif image.kind == 'video' %}
+                                <video autoplay loop muted playsinline>
+                                    <source src="{{ image.url }}" type="video/mp4">
+                                    Your browser does not support the videos.
+                                </video>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    {{ richText.route(block.text) }}
+
+                </div>
+            </div>
+        {% elseif block.type == 'blockProfile' %}
+            <div class="block">
+                <div class="col-{{ block.width }} management">
+
+                    {% set columns = (block.width|escape * 0.375)|round(0, 'floor') %}
+
+                    {% set team = craft.entries
+                        .section('team')
+                        .all() %}
+
+                    {% for row in block.profiles|batch(columns) %}
+                        <div class="grid">
+
+                            {% for profile in row %}
+                                <div class="col-{{ 12 / columns }}">
+
+                                    {% for image in profile.portrait.all() %}
+                                        <img class="w-full lazyload" {{ lazyImage.srcset('fit', [150, 400, 750], profile.portrait, loop.index0) }} alt="{{ image.title }}">
+                                    {% endfor %}
+
+                                    <p class="profile-name mb-0 font-bold">{{ profile.fullname }}</p>
+                                    <p class="profile-title">{{ profile.position }}</p>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        {% elseif block.type == 'blockMap' %}
+            {#<div class="block">#}
+                {#<div class="col-{{ block.width }} map">#}
+                    {#<div id="map{{ loop.index }}" style="height:300px;"></div>#}
+
+                    {#{% set locations = '' %}#}
+
+                    {#{% for row in block.pins %}#}
+                        {#{% set site = "['" ~ row.location ~ "', " ~ row.coordinates ~ ", " ~ loop.index ~ "]" %}#}
+                        {#{% set locations = locations ~ (loop.first ? '[') ~ site ~ (loop.last ? ']' :', ') %}#}
+                    {#{% endfor %}#}
+
+                    {#{% js %}#}
+                        {#var locations = {{ locations|raw }};#}
+                        {#var map = new google.maps.Map(document.getElementById('map{{ loop.index }}'), {#}
+                        {#zoom: 10,#}
+                        {#center: new google.maps.LatLng(-39.92, 151.25),#}
+                        {#mapTypeId: google.maps.MapTypeId.ROADMAP#}
+                        {#});#}
+                        {#var infowindow = new google.maps.InfoWindow();#}
+                        {#var marker, i;#}
+                        {#var markers = new Array();#}
+                        {#for (i = 0; i < locations.length; i++) {#}
+                        {#marker = new google.maps.Marker({#}
+                        {#position: new google.maps.LatLng(locations[i][1], locations[i][2]),#}
+                        {#map: map#}
+                        {#});#}
+                        {#markers.push(marker);#}
+                        {#google.maps.event.addListener(marker, 'click', (function(marker, i) {#}
+                        {#return function() {#}
+                        {#infowindow.setContent(locations[i][0]);#}
+                        {#infowindow.open(map, marker);#}
+                        {#};#}
+                        {#})(marker, i));#}
+                        {#}#}
+                        {#function AutoCenter() {#}
+                        {#//  Create a new viewpoint bound#}
+                        {#var bounds = new google.maps.LatLngBounds();#}
+                        {#//  Go through each...#}
+                        {#for (i = 0; i < markers.length; i++) {#}
+                        {#bounds.extend(markers[i].position);#}
+                        {#}#}
+
+                        {#//  Fit these bounds to the map#}
+                        {#map.fitBounds(bounds);#}
+                        {#}#}
+                        {#AutoCenter();#}
+                    {#{% endjs %}#}
+                {#</div>#}
+            {#</div>#}
+        {% elseif block.type == 'blockClearfix' %}
+        {% elseif block.type == 'blockClearfix' %}
+            <div class="clearfix"></div>
+        {% endif %}
+        {% if loop.last and (block.type == 'blockText' or block.type == 'blockImage') %}
+            </div>
+        {% elseif ((block.type == 'blockText' or block.type == 'blockImage') and (block.next.type != 'blockText' and block.next.type != 'blockImage')) %}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

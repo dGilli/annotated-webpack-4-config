@@ -1,0 +1,51 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+
+{% extends "_layouts/site.twig" %}
+
+{% import '_macros/lazyImage.twig' as lazyImage %}
+
+{% block main %}
+    <h1>{{ entry.pageHeading|upper }}</h1>
+
+    {% for block in entry.productsContent %}
+
+        {% if loop.first %}
+        <section class="section product-group"{{ block.type == 'blockProductGroup' ? ' id="' ~ block.heading|lower ~ '"'}}>
+        {% elseif (block.type == 'blockProductGroup') %}
+            </section>
+            <section class="section product-group"{{ block.type == 'blockProductGroup' ? ' id="' ~ block.heading|lower ~ '"'}}>
+        {% endif %}
+
+        {% if block.type == 'blockProductGroup' %}
+            <h2>{{ block.heading|upper }}</h2>
+            {{ block.text }}
+        {% elseif block.type == 'blockProduct' %}
+            <h3>{{ block.productName|upper }}</h3>
+
+            <div class="product">
+                <div class="image">
+                    {% for image in block.image %}
+                        <img style="width:100%;" class="lazyload" {{ lazyImage.srcset('fit', [345, 470, 525, 737, 1050, 1400], block.image, loop.index0) }} alt="{{ image.title }}">
+                    {% endfor %}
+                </div>
+
+                {% if block.specifications|length %}
+                    <div class="info">
+                        <ul class="specs">
+                            <li><h4>{{ 'tlSpecification'|t|upper }}</h4></li>
+                            {% for row in block.specifications %}
+                                <li>{{ row.specification }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+            </div>
+        {% endif %}
+
+        {% if loop.last %}
+            </section>
+        {% endif %}
+
+    {% endfor %}
+{% endblock %}

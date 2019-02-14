@@ -5,11 +5,18 @@ return [
     // A
 
     "A member of the" => "Ein Mitglied der",
+    "Address" => "Adresse",
 
 
     // B
+
+    "Back to home" => "Zurück zur Startseite",
+    "Back" => "Zurück",
+
+
     // C
 
+    "Current" => "Aktuell",
     "Copyright Notice" => "Copyright Hinweis",
 
 
@@ -32,57 +39,50 @@ return [
     // K
     // L
     // M
+
+    "Message was successfully sent!" => "Nachricht wurde Erfolgreich gesendet!",
+    "Message" => "Nachricht",
+
+
     // N
+
+    "Name" => "Name",
+
+
     // O
+
+    "Older Articles" => "Ältere Artikel",
+
+
     // P
 
+    "Page not found" => "Seite nicht gefunden",
     "Phone" => "Tel.",
 
 
     // Q
     // R
     // S
+
+    "Send" => "Senden",
+    "Specifications" => "Spezifikationen",
+    "Subject" => "Betreff",
+
     // T
+
+    "There are currently no new news articles." => "Derzeit gibt es keine neuen Newsatrikel.",
+    "There are no openings at the moment." => "Derzeit sind keine offene Stellen vorhanden.",
+
+
     // U
     // V
     // W
+
+    "Website" => "Webseite",
+
+
     // X
     // Y
     // Z
 
-    //
-    // Deutsche Übersetzungen für statische Texte
-    // --------------------------------------------------
-    //== Produkte
-    //
-    //##
-    "tlSpecification" => "Spezifikationen",
-    //== News
-    //
-    //##
-    "tlCurrentNews" => "Aktuell",
-    "tlOlderNews" => "Ältere Artikel",
-    "tlBack" => "< Zurück",
-    //== Jobs
-    //
-    //##
-    "tlNoOpenings" => "Derzeit sind keine offene Stellen verhanden.",
-    //== Kontakt
-    //
-    //##
-    "tlAddress" => "Adresse",
-    "tlAddressPhone" => "Tel.",
-    "tlAddressEmail" => "E-Mail",
-    "tlAddressWebsite" => "Webseite",
-    "tlName" => "Name",
-    "tlEmail" => "E-Mail",
-    "tlSubject" => "Betreff",
-    "tlMessage" => "Nachricht",
-    "tlSend" => "Senden",
-    "tlSendSuccess" => "Nachricht wurde Erfolgreich gesendet!",
-    //== 404 - Seite nicht gefunden
-    //
-    //##
-    "tlPageNotFound" => "Seite nicht gefunden",
-    "tlBackToHome" => "Zurück zur Startseite",
 ];
